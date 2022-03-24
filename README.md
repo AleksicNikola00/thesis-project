@@ -13,4 +13,10 @@ Thesis web project at Faculty of Technical Sciences,Novi Sad. Including web scra
  -requests
      -installed via conda prompt(conda install -c anaconda requests)
      -or via command prompt(pip install requests)
+ -selenium 
+   -installed via conda prompt(conda install -c anaconda selenium)
+   -or via command prompt(pip install selenium)
+ -web-driver manager
+   -installed via conda prompt(conda install -c conda-forge webdriver-manager)
+   -or via command prompt(pip install webdriver-manager)
      
