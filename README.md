@@ -1,8 +1,8 @@
-# ThesisProject
- 
+# Ranking boutique's prices web app
 Thesis web project at Faculty of Technical Sciences,Novi Sad. Including web scraper that refreshes database, and web application that shows products from multiple boutiques ranking them by price.
-
--Web scraper prerequirements:
+ 
+### Web scraper prerequirements: :rocket:
+------------------
  -python version 3.8(or higher)
  -beautifulsoap4
      -installed via conda prompt(conda install-c anaconda beautifulsoup4)
