@@ -10,6 +10,9 @@ from model.Product import Product
 
 
 # form 32.232,00 RSD
+from model.enumerations.product_type import ProductType
+
+
 def convert_to_num(number_string):
     num = number_string.split(' ')[0]
     num = num.replace('.', '')
@@ -22,8 +25,8 @@ class FashionAndFriendsScraper:
         self.driver = driver
         self.products = []
 
-    def land_first_page(self):
-        self.driver.get(constants.BASE_URL_FASHION_SHOES)
+    def land_first_page(self, base_url):
+        self.driver.get(base_url)
 
     def close_pop_ups(self):
         self.close_cookies()
@@ -63,14 +66,14 @@ class FashionAndFriendsScraper:
                 break
             last_height = new_height
 
-    def collect_data(self):
+    def collect_data(self, product_type):
         shoes = self.driver.find_elements(By.XPATH,
                                           '//li[@class="item product product-item-info product-item col-lg-4 col-md-4 col-sm-4 col-xs-6"]')
         for shoe in shoes:
             href = shoe.find_element(By.TAG_NAME, 'a').get_attribute('href')
-            self.collect_product(href)
+            self.collect_product(href, product_type)
 
-    def collect_product(self, link):
+    def collect_product(self, link, product_type):
         product_html = requests.get(link).text
         product_soup = BeautifulSoup(product_html, 'lxml')
         try:
@@ -78,7 +81,7 @@ class FashionAndFriendsScraper:
             brand = product_info.a['title']
             model = product_info.find('div', class_='product attribute overview').div.text
             price = convert_to_num(product_info.find('span', class_='price').text)
-            self.products.append(Product(brand=brand, model=model, price=price, link=link))
+            self.products.append(Product(brand=brand, model=model, price=price, link=link, product_type=product_type.value))
         except:
             print('Exception on link: ' + link)
 
@@ -87,10 +90,24 @@ class FashionAndFriendsScraper:
             product.to_string()
             print('\n')
 
-    def execute(self):
-        self.land_first_page()
+    def execute_shoes(self, print_data=True):
+        self.products = []
+        self.land_first_page(constants.BASE_URL_FASHION_SHOES)
         self.close_pop_ups()
         self.scroll_down()
-        self.collect_data()
-        self.print_list()
-        print(len(self.products))
+        self.collect_data(product_type=ProductType.SHOES)
+        self.serialize_to_json(path='men-shoes-fashion-and-friends.json')
+        if print_data:
+            self.print_list()
+            print(len(self.products))
+
+    def execute_clothes(self, print_data=True):
+        self.products = []
+        self.land_first_page(constants.BASE_URL_FASHION_CLOTHES)
+        self.close_pop_ups()
+        self.scroll_down()
+        self.collect_data(product_type=ProductType.CLOTHES)
+        self.serialize_to_json(path='men-clothes-fashion-and-friends.json')
+        if print_data:
+            self.print_list()
+            print(len(self.products))

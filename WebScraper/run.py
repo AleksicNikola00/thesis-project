@@ -7,5 +7,6 @@ driver = webdriver.Chrome(ChromeDriverManager().install())
 
 # Fashion and Friends
 bot = FashionAndFriendsScraper(driver)
-bot.execute()
+bot.execute_clothes()
+bot.execute_shoes()
 
