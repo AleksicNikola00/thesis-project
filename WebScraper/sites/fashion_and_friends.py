@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import requests
+import json
 
 from model.Product import Product
 
@@ -82,15 +83,21 @@ class FashionAndFriendsScraper:
         except:
             print('Exception on link: ' + link)
 
+    def serialize_to_json(self):
+        with open('../jsons/men-shoes-fashion-and-friends.json', 'w+') as write:
+            json.dump(self.products, write, default=vars)
+
     def print_list(self):
         for product in self.products:
             product.to_string()
             print('\n')
 
-    def execute(self):
+    def execute(self, print_data=True):
         self.land_first_page()
         self.close_pop_ups()
         self.scroll_down()
         self.collect_data()
-        self.print_list()
-        print(len(self.products))
+        self.serialize_to_json()
+        if print_data:
+            self.print_list()
+            print(len(self.products))
