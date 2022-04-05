@@ -1,16 +1,18 @@
 import time
 import constants
+import json
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import requests
-import json
 
 from model.Product import Product
 
-
 # form 32.232,00 RSD
+from model.enumerations.product_type import ProductType
+
+
 def convert_to_num(number_string):
     num = number_string.split(' ')[0]
     num = num.replace('.', '')
@@ -23,8 +25,8 @@ class FashionAndFriendsScraper:
         self.driver = driver
         self.products = []
 
-    def land_first_page(self):
-        self.driver.get(constants.BASE_URL_FASHION_SHOES)
+    def land_first_page(self, base_url):
+        self.driver.get(base_url)
 
     def close_pop_ups(self):
         self.close_cookies()
@@ -38,14 +40,17 @@ class FashionAndFriendsScraper:
 
     # usually displayed 30 seconds after page landing
     def close_subscriptions(self):
-        WebDriverWait(self.driver, 60).until(
-            expected_conditions.element_to_be_clickable(
-                # Element filtration
-                (By.XPATH, "//span[text()='X']")
+        try:
+            WebDriverWait(self.driver, 60).until(
+                expected_conditions.element_to_be_clickable(
+                    # Element filtration
+                    (By.XPATH, "//span[text()='X']")
+                )
             )
-        )
-        button = self.driver.find_element(By.XPATH, "//span[text()='X']")
-        button.click()
+            button = self.driver.find_element(By.XPATH, "//span[text()='X']")
+            button.click()
+        except:
+            print('Subscription pop up did not show!')
 
     def scroll_down(self):
         # Get scroll height
@@ -64,14 +69,14 @@ class FashionAndFriendsScraper:
                 break
             last_height = new_height
 
-    def collect_data(self):
+    def collect_data(self, product_type):
         shoes = self.driver.find_elements(By.XPATH,
                                           '//li[@class="item product product-item-info product-item col-lg-4 col-md-4 col-sm-4 col-xs-6"]')
         for shoe in shoes:
             href = shoe.find_element(By.TAG_NAME, 'a').get_attribute('href')
-            self.collect_product(href)
+            self.collect_product(href, product_type)
 
-    def collect_product(self, link):
+    def collect_product(self, link, product_type):
         product_html = requests.get(link).text
         product_soup = BeautifulSoup(product_html, 'lxml')
         try:
@@ -79,12 +84,13 @@ class FashionAndFriendsScraper:
             brand = product_info.a['title']
             model = product_info.find('div', class_='product attribute overview').div.text
             price = convert_to_num(product_info.find('span', class_='price').text)
-            self.products.append(Product(brand=brand, model=model, price=price, link=link))
+            self.products.append(
+                Product(brand=brand, model=model, price=price, link=link, product_type=product_type.value))
         except:
             print('Exception on link: ' + link)
 
-    def serialize_to_json(self):
-        with open('../jsons/men-shoes-fashion-and-friends.json', 'w+') as write:
+    def serialize_to_json(self, path):
+        with open('../jsons/' + path, 'w+') as write:
             json.dump(self.products, write, default=vars)
 
     def print_list(self):
@@ -92,12 +98,3 @@ class FashionAndFriendsScraper:
             product.to_string()
             print('\n')
 
-    def execute(self, print_data=True):
-        self.land_first_page()
-        self.close_pop_ups()
-        self.scroll_down()
-        self.collect_data()
-        self.serialize_to_json()
-        if print_data:
-            self.print_list()
-            print(len(self.products))
