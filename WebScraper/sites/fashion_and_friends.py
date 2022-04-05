@@ -1,5 +1,6 @@
 import time
 import constants
+import json
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
@@ -7,7 +8,6 @@ from bs4 import BeautifulSoup
 import requests
 
 from model.Product import Product
-
 
 # form 32.232,00 RSD
 from model.enumerations.product_type import ProductType
@@ -40,14 +40,17 @@ class FashionAndFriendsScraper:
 
     # usually displayed 30 seconds after page landing
     def close_subscriptions(self):
-        WebDriverWait(self.driver, 60).until(
-            expected_conditions.element_to_be_clickable(
-                # Element filtration
-                (By.XPATH, "//span[text()='X']")
+        try:
+            WebDriverWait(self.driver, 60).until(
+                expected_conditions.element_to_be_clickable(
+                    # Element filtration
+                    (By.XPATH, "//span[text()='X']")
+                )
             )
-        )
-        button = self.driver.find_element(By.XPATH, "//span[text()='X']")
-        button.click()
+            button = self.driver.find_element(By.XPATH, "//span[text()='X']")
+            button.click()
+        except:
+            print('Subscription pop up did not show!')
 
     def scroll_down(self):
         # Get scroll height
@@ -81,9 +84,14 @@ class FashionAndFriendsScraper:
             brand = product_info.a['title']
             model = product_info.find('div', class_='product attribute overview').div.text
             price = convert_to_num(product_info.find('span', class_='price').text)
-            self.products.append(Product(brand=brand, model=model, price=price, link=link, product_type=product_type.value))
+            self.products.append(
+                Product(brand=brand, model=model, price=price, link=link, product_type=product_type.value))
         except:
             print('Exception on link: ' + link)
+
+    def serialize_to_json(self, path):
+        with open('../jsons/' + path, 'w+') as write:
+            json.dump(self.products, write, default=vars)
 
     def print_list(self):
         for product in self.products:
@@ -93,7 +101,7 @@ class FashionAndFriendsScraper:
     def execute_shoes(self, print_data=True):
         self.products = []
         self.land_first_page(constants.BASE_URL_FASHION_SHOES)
-        self.close_pop_ups()
+        # self.close_pop_ups()
         self.scroll_down()
         self.collect_data(product_type=ProductType.SHOES)
         self.serialize_to_json(path='men-shoes-fashion-and-friends.json')
