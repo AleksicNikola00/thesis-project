@@ -98,24 +98,3 @@ class FashionAndFriendsScraper:
             product.to_string()
             print('\n')
 
-    def execute_shoes(self, print_data=True):
-        self.products = []
-        self.land_first_page(constants.BASE_URL_FASHION_SHOES)
-        # self.close_pop_ups()
-        self.scroll_down()
-        self.collect_data(product_type=ProductType.SHOES)
-        self.serialize_to_json(path='men-shoes-fashion-and-friends.json')
-        if print_data:
-            self.print_list()
-            print(len(self.products))
-
-    def execute_clothes(self, print_data=True):
-        self.products = []
-        self.land_first_page(constants.BASE_URL_FASHION_CLOTHES)
-        self.close_pop_ups()
-        self.scroll_down()
-        self.collect_data(product_type=ProductType.CLOTHES)
-        self.serialize_to_json(path='men-clothes-fashion-and-friends.json')
-        if print_data:
-            self.print_list()
-            print(len(self.products))
