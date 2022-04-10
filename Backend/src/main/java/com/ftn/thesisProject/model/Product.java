@@ -1,5 +1,6 @@
 package com.ftn.thesisProject.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ftn.thesisProject.model.enumerations.ProductType;
 
 import javax.persistence.Entity;
@@ -16,7 +17,8 @@ public class Product {
     private String model;
     private Double price;
     private String link;
-    private ProductType type;
+    @JsonProperty("product_type")
+    private ProductType productType;
 
     public void setId(Long id) {
         this.id = id;
@@ -59,12 +61,11 @@ public class Product {
         this.link = link;
     }
 
-    public ProductType getType() {
-        return type;
+    public ProductType getProductType() {
+        return productType;
     }
 
-    public void setType(ProductType productType) {
-        this.type = productType;
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
-
 }
