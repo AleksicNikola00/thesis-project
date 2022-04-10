@@ -9,6 +9,6 @@ public interface ProductService {
      List<Product> getAll();
      List<Product> getAllByType(ProductType type);
      Product getById(Long id);
-
+     void deleteAll();
      void saveAll(List<Product> products);
 }

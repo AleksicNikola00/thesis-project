@@ -7,29 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 @Service
 public class UpdateDatabaseService {
 
-    private ProductService productService;
+    final private ProductService productService;
 
     @Autowired
     public UpdateDatabaseService(ProductService productService) {
         this.productService = productService;
     }
 
-    @Scheduled(cron = "0 53 19 * * *")
-    public void UpdateDatabase(){
+    @Scheduled(cron = "0 37 1 * * *")
+    public void UpdateDatabase() {
+        productService.deleteAll();
         ObjectMapper mapper = new ObjectMapper();
-        TypeReference<List<Product>> typeReference = new TypeReference<List<Product>>(){};
-        InputStream inputStream = TypeReference.class.getResourceAsStream("/jsons/men-clothes-fashion-and-friends.json");
-        try{
-            List<Product> products = mapper.readValue(inputStream,typeReference);
-            productService.saveAll(products);
-            System.out.println("Products successfully saved!");
+        TypeReference<List<Product>> typeReference = new TypeReference<>() {
+        };
+        InputStream inputStream = TypeReference.class.getResourceAsStream("/jsons/json-list.txt");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        try {
+            while(reader.ready()) {
+                String path = reader.readLine();
+                InputStream inpStream = TypeReference.class.getResourceAsStream("/jsons/" + path);
+                List<Product> products = mapper.readValue(inpStream,typeReference);
+                productService.saveAll(products);
+                System.out.println("Products successfully saved!");
+            }
         }
         catch (IOException e){
             System.out.println("Error while saving: " + e.getMessage());
