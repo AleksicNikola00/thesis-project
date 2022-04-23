@@ -84,8 +84,9 @@ class FashionAndFriendsScraper:
             brand = product_info.a['title']
             model = product_info.find('div', class_='product attribute overview').div.text
             price = convert_to_num(product_info.find('span', class_='price').text)
+            image_src = product_soup.find('img', alt='main product photo')['src']
             self.products.append(
-                Product(brand=brand, model=model, price=price, link=link, product_type=product_type.value))
+                Product(brand=brand, model=model, price=price, link=link, product_type=product_type.value, img_src=image_src))
         except:
             print('Exception on link: ' + link)
 
