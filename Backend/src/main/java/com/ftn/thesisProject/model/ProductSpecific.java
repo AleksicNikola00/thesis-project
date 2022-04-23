@@ -9,7 +9,7 @@ public class ProductSpecific {
     private Long id;
     private double price;
     private String link;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private ProductBase productBase;
 
     public void setId(Long id) {
@@ -34,5 +34,13 @@ public class ProductSpecific {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public ProductBase getProductBase() {
+        return productBase;
+    }
+
+    public void setProductBase(ProductBase productBase) {
+        this.productBase = productBase;
     }
 }

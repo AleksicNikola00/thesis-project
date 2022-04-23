@@ -13,16 +13,18 @@ import java.util.List;
 @Service
 public class UpdateDatabaseService {
 
-    final private ProductService productService;
+    private ProductBaseService productBaseService;
+    private ProductSpecificService productSpecificService;
 
     @Autowired
-    public UpdateDatabaseService(ProductService productService) {
-        this.productService = productService;
+    public UpdateDatabaseService(ProductBaseService productBaseService, ProductSpecificService productSpecificService) {
+        this.productBaseService = productBaseService;
+        this.productSpecificService = productSpecificService;
     }
 
-    @Scheduled(cron = "0 37 1 * * *")
+    @Scheduled(cron = "1 * * * * *")
     public void UpdateDatabase() {
-        productService.deleteAll();
+        //productService.deleteAll();
         ObjectMapper mapper = new ObjectMapper();
         TypeReference<List<Product>> typeReference = new TypeReference<>() {
         };
@@ -35,7 +37,12 @@ public class UpdateDatabaseService {
                 String path = reader.readLine();
                 InputStream inpStream = TypeReference.class.getResourceAsStream("/jsons/" + path);
                 List<Product> products = mapper.readValue(inpStream,typeReference);
-                productService.saveAll(products);
+                for(Product product : products){
+                    productBaseService.save(product.getProductBase());
+                    product.getProductSpecific().setProductBase(product.getProductBase());
+                    productSpecificService.save(product.getProductSpecific());
+                }
+                //productService.saveAll(products);
                 System.out.println("Products successfully saved!");
             }
         }

@@ -10,6 +10,8 @@ import requests
 from model.Product import Product
 
 # form 32.232,00 RSD
+from model.ProductBase import ProductBase
+from model.ProductSpecific import ProductSpecific
 from model.enumerations.product_type import ProductType
 
 
@@ -86,7 +88,7 @@ class FashionAndFriendsScraper:
             price = convert_to_num(product_info.find('span', class_='price').text)
             image_src = product_soup.find('img', alt='main product photo')['src']
             self.products.append(
-                Product(brand=brand, model=model, price=price, link=link, product_type=product_type.value, img_src=image_src))
+                Product(ProductBase(brand=brand, model=model, product_type=product_type.value, img_src=image_src), ProductSpecific(link=link, price=price)))
         except:
             print('Exception on link: ' + link)
 
