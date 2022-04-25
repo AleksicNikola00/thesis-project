@@ -38,4 +38,14 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     public void saveAll(List<ProductBase> productBases) {
         productBaseRepository.saveAll(productBases);
     }
+
+    @Override
+    public void deleteAll() {
+        productBaseRepository.deleteAll();
+    }
+
+    @Override
+    public ProductBase findByModel(String model) {
+        return productBaseRepository.findProductBaseByModel(model);
+    }
 }

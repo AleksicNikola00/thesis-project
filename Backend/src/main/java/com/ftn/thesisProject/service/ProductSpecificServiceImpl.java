@@ -36,4 +36,9 @@ public class ProductSpecificServiceImpl implements ProductSpecificService{
     public void saveAll(List<ProductSpecific> productSpecifics) {
         productSpecificRepository.saveAll(productSpecifics);
     }
+
+    @Override
+    public void deleteAll() {
+        productSpecificRepository.deleteAll();
+    }
 }

@@ -9,4 +9,6 @@ public interface ProductBaseService {
     public ProductBase getById(Long id);
     public void save(ProductBase productBase);
     public void saveAll(List<ProductBase> productBases);
+    public void deleteAll();
+    public ProductBase findByModel(String model);
 }
