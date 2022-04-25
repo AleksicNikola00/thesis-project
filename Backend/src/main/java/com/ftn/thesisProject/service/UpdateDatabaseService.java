@@ -23,7 +23,8 @@ public class UpdateDatabaseService {
         this.productSpecificService = productSpecificService;
     }
 
-    //second, minute, hour, day of month, month, day(s) of week
+    // cron = second, minute, hour, day of month, month, day(s) of week
+    // once a day
     @Scheduled(cron = "0 0 0 * * *")
     public void updateDatabase() {
         productSpecificService.deleteAll();
@@ -50,6 +51,7 @@ public class UpdateDatabaseService {
         }
     }
 
+    // once a week
     @Scheduled(cron = "0 0 0 * * 0")
     public void restartDatabase(){
         productBaseService.deleteAll();
