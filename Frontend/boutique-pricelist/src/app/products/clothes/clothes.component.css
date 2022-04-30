@@ -1,3 +1,9 @@
 .center-text{
     text-align: center;
 }
+
+.scroll {
+    max-height: 1020px;
+    overflow-y: auto;
+
+}

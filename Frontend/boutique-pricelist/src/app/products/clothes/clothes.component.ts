@@ -10,9 +10,6 @@ import { ProductService } from '../product.service';
 export class ClothesComponent implements OnInit {
 
   clothes: IProduct[] = [];
-  brands: string[] = [
-    "Nike","Adidas","Fila","Replay","Reebok","Converse","Versace","Prada","Dior","Givenchy"
-  ]
 
   constructor(private _productService : ProductService) { }
 

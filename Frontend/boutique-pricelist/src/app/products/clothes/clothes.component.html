@@ -1,33 +1,24 @@
 <div class="container-fluid">
-    <div class="row m-0 mt-5" style="height: 1000px;">
+    <div class="row m-0 mt-5" style="height: 1020px;">
 
       <div class="col-3">
-        <div class="card h-100 shadow-lg">
-            <div class="card-body">
-
-              <h4 class="card-title center-text">Filter</h4>
-              <h6 class=""> Brands</h6>
-              <div *ngFor="let item of brands">
-                <input class="form-check-input ms-2" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                <label class="ms-2">{{item}}</label>
-              </div>
-            </div>
-
-            <button type="button" class="btn btn-dark m-5">Apply filter</button>
-
-            <div class="card-footer">
-              <small class="text-muted">Developed by: Aleksic Nikola</small>
-            </div>
-          </div>
+          <app-filter></app-filter>
       </div>
      
       <div class="col-9">
-        <div class="card h-100 shadow-lg">
+        <div class="card scroll h-100 shadow-lg">
             <div class="card-body">
-              <h5 class="card-title">Filter</h5>
-              <p class="card-text">This is a wider card with supporting 
-                  text below as a natural lead-in to additional content. This content 
-                  is a little bit longer.</p>
+              <div class="row">
+                <div class="col-2 m-3" *ngFor="let product of clothes">
+                  <div class="card border-dark shadow-sm" style="width: 18rem;">
+                    <img [src]="product.imgUrl" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{product.brand}}</h5>
+                      <p class="card-text">{{product.model}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             
           </div>
