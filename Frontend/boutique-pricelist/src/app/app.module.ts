@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ShoesComponent } from './products/shoes/shoes.component';
 import { ClothesComponent } from './products/clothes/clothes.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     ShoesComponent,
-    ClothesComponent
+    ClothesComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
