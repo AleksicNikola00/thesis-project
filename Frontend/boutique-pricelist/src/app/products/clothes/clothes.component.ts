@@ -14,7 +14,10 @@ export class ClothesComponent implements OnInit {
   constructor(private _productService : ProductService) { }
 
   ngOnInit(): void {
-    this.clothes = this._productService.getClothes();
+   this._productService.getClothes().subscribe(
+     value => this.clothes = value,
+     error => console.log(error)
+   );
   }
 
 }

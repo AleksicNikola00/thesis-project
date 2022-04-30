@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { IProduct } from '../model/IProduct';
 
 @Injectable({
@@ -6,120 +9,13 @@ import { IProduct } from '../model/IProduct';
 })
 export class ProductService {
 
-  constructor() { }
+  private url: string = "/products"
 
-  getClothes(): IProduct[]{
-    return [
-      {
-        brand: 'Nike',
-        model: 'Air Max',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'Adidas',
-        model: 'Bla',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'New balanca',
-        model: 'Tenk',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/C/P/CPPPCU61055CA-1067-1.jpg' 
-      },
-      {
-        brand: 'Nike',
-        model: 'Air Max',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'Adidas',
-        model: 'Bla',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'New balanca',
-        model: 'Tenk',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/C/P/CPPPCU61055CA-1067-1.jpg' 
-      },
-      {
-        brand: 'Nike',
-        model: 'Air Max',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'Adidas',
-        model: 'Bla',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'New balanca',
-        model: 'Tenk',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/C/P/CPPPCU61055CA-1067-1.jpg' 
-      },
-      {
-        brand: 'Nike',
-        model: 'Air Max',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'Adidas',
-        model: 'Bla',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'New balanca',
-        model: 'Tenk',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/C/P/CPPPCU61055CA-1067-1.jpg' 
-      },
-      {
-        brand: 'Nike',
-        model: 'Air Max',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'Adidas',
-        model: 'Bla',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'New balanca',
-        model: 'Tenk',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/C/P/CPPPCU61055CA-1067-1.jpg' 
-      },
-      {
-        brand: 'Nike',
-        model: 'Air Max',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'Adidas',
-        model: 'Bla',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/S/D/SDMS311279A-02A-1.jpg' 
-      },
-      {
-        brand: 'New balanca',
-        model: 'Tenk',
-        type: 'Shoes',
-        imgUrl: 'https://www.fashionandfriends.com/pub/media/catalog/product/cache/67eb99f26f3721ba9aa4712a229cdf1d/C/P/CPPPCU61055CA-1067-1.jpg' 
-      },
-      
-      
-    ];
+  constructor(private http: HttpClient) { }
+
+ 
+
+  getClothes(): Observable<IProduct[]>{
+      return this.http.get<IProduct[]>(environment.host + this.url);
   }
 }

@@ -10,6 +10,7 @@ import { ClothesComponent } from './products/clothes/clothes.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterComponent } from './products/filter/filter.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductListComponent } from './products/product-list/product-list.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
