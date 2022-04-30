@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IProduct } from 'src/app/model/IProduct';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-clothes',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClothesComponent implements OnInit {
 
-  constructor() { }
+  clothes: IProduct[] = [];
+  brands: string[] = [
+    "Nike","Adidas","Fila","Replay","Reebok","Converse","Versace","Prada","Dior","Givenchy"
+  ]
+
+  constructor(private _productService : ProductService) { }
 
   ngOnInit(): void {
+    this.clothes = this._productService.getClothes();
   }
 
 }
