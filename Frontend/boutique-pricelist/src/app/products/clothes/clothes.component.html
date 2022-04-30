@@ -6,22 +6,7 @@
       </div>
      
       <div class="col-9">
-        <div class="card scroll h-100 shadow-lg">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-2 m-3" *ngFor="let product of clothes">
-                  <div class="card border-dark shadow-sm" style="width: 18rem;">
-                    <img [src]="product.imgUrl" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{product.brand}}</h5>
-                      <p class="card-text">{{product.model}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
+        <app-product-list [products]="clothes"></app-product-list>
       </div>  
 
     </div>
