@@ -17,7 +17,7 @@ public class ProductBase {
     @JsonProperty("product_type")
     private ProductType productType;
     @JsonProperty("img_src")
-    private String ImgSrc;
+    private String imgSrc;
     @OneToMany(mappedBy = "productBase", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<ProductSpecific> productSpecifics;
@@ -58,11 +58,11 @@ public class ProductBase {
     }
 
     public String getImgSrc() {
-        return ImgSrc;
+        return imgSrc;
     }
 
     public void setImgSrc(String imgSrc) {
-        ImgSrc = imgSrc;
+        this.imgSrc = imgSrc;
     }
 
     public List<ProductSpecific> getProductSpecifics() {

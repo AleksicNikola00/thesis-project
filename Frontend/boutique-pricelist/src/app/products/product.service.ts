@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IProduct } from '../model/IProduct';
+import { IProductDetails } from '../model/IProductDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +19,9 @@ export class ProductService {
   getClothes(): Observable<IProduct[]>{
       return this.http.get<IProduct[]>(environment.host + this.url);
   }
+
+  getProductDetails(id: number): Observable<IProductDetails>{
+      return this.http.get<IProductDetails>(environment.host + this.url + `/${id}`);
+  }
+
 }
