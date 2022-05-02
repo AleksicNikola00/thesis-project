@@ -1,5 +1,7 @@
 package com.ftn.thesisProject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class ProductSpecific {
     private double price;
     private String link;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private ProductBase productBase;
 
     public void setId(Long id) {

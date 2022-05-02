@@ -8,12 +8,14 @@ public class ProductBaseDTO {
     private String model;
     private ProductType type;
     private String imgUrl;
+    private Long id;
 
-    public ProductBaseDTO(String brand, String model, ProductType productType, String imgUrl) {
+    public ProductBaseDTO(String brand, String model, ProductType type, String imgUrl, Long id) {
         this.brand = brand;
         this.model = model;
-        this.type = productType;
+        this.type = type;
         this.imgUrl = imgUrl;
+        this.id = id;
     }
 
     public String getBrand() {
@@ -32,7 +34,6 @@ public class ProductBaseDTO {
         this.model = model;
     }
 
-
     public ProductType getType() {
         return type;
     }
@@ -47,5 +48,13 @@ public class ProductBaseDTO {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -1,5 +1,6 @@
 package com.ftn.thesisProject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ftn.thesisProject.model.enumerations.ProductType;
 
@@ -18,6 +19,7 @@ public class ProductBase {
     @JsonProperty("img_src")
     private String ImgSrc;
     @OneToMany(mappedBy = "productBase", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<ProductSpecific> productSpecifics;
 
     public ProductBase() {

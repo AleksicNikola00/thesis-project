@@ -1,7 +1,8 @@
 <div class="card scroll h-100 shadow-lg">
     <div class="card-body">
       <div class="row">
-        <div class="col-2 m-3" *ngFor="let product of products">
+        <div class="col-2 m-3" *ngFor="let product of products" [routerLink]="['/products', product.id]"
+        routerLinkActive="router-link-active">
           <div class="card border-dark shadow-sm" style="width: 18rem;height: 34rem;">
             <img [src]="product.imgUrl" class="card-img-top" alt="...">
             <div class="card-body">

@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FilterComponent } from './products/filter/filter.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     ClothesComponent,
     NavbarComponent,
     FilterComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

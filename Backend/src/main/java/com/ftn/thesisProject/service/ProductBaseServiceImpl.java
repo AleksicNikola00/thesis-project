@@ -26,7 +26,7 @@ public class ProductBaseServiceImpl implements ProductBaseService {
 
     @Override
     public ProductBase getById(Long id) {
-        return productBaseRepository.getById(id);
+        return productBaseRepository.findById(id).get();
     }
 
     @Override
