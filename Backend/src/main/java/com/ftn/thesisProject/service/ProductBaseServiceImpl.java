@@ -2,6 +2,7 @@ package com.ftn.thesisProject.service;
 
 
 import com.ftn.thesisProject.model.ProductBase;
+import com.ftn.thesisProject.model.enumerations.ProductType;
 import com.ftn.thesisProject.repository.ProductBaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,4 +49,11 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     public ProductBase findByModel(String model) {
         return productBaseRepository.findProductBaseByModel(model);
     }
+
+    @Override
+    public List<ProductBase> findAllByType(ProductType type) {
+        return  productBaseRepository.findAllByProductType(type);
+    }
+
+
 }
