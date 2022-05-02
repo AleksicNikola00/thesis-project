@@ -6,13 +6,13 @@ public class ProductBaseDTO {
 
     private String brand;
     private String model;
-    private ProductType productType;
+    private ProductType type;
     private String imgUrl;
 
     public ProductBaseDTO(String brand, String model, ProductType productType, String imgUrl) {
         this.brand = brand;
         this.model = model;
-        this.productType = productType;
+        this.type = productType;
         this.imgUrl = imgUrl;
     }
 
@@ -32,12 +32,13 @@ public class ProductBaseDTO {
         this.model = model;
     }
 
-    public ProductType getProductType() {
-        return productType;
+
+    public ProductType getType() {
+        return type;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
+    public void setType(ProductType type) {
+        this.type = type;
     }
 
     public String getImgUrl() {
