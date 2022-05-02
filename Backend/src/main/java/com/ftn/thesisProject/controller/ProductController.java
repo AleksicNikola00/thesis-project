@@ -3,6 +3,7 @@ package com.ftn.thesisProject.controller;
 import com.ftn.thesisProject.dtos.ProductBaseDTO;
 import com.ftn.thesisProject.model.ProductBase;
 import com.ftn.thesisProject.service.ProductBaseService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/products")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class ProductController {
 
