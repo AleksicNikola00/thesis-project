@@ -1,0 +1,7 @@
+4. april 8 ujutru. KT
+
+    -inzenjering zahteva(pricaj sa bar 4 starosne grupe oko aplikacije)
+    -napraviti jednostavan crawler(za pocetak makar jedna prodavnica da bude pokrivena)
+    -napraviti jednostavan UI
+    -ponoviti izenjering zahteva pri cemu prikazati aplikaciju i diskutovati dodatne funkcionalnosti
+    

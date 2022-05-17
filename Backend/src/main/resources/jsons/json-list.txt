@@ -1,0 +1,2 @@
+men-clothes-fashion-and-friends.json
+men-shoes-fashion-and-friends.json
