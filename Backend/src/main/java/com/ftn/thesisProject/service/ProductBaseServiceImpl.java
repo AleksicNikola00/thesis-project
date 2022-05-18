@@ -44,14 +44,15 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     }
 
     @Override
+    public ProductBase findByModelAndBrand(String model, String brand){
+        return  productBaseRepository.findProductBaseByModelAndBrand(model,brand);
+    }
+
+    @Override
     public List<ProductBase> findAllByType(ProductType type) {
         return  productBaseRepository.findAllByProductType(type);
     }
 
-    @Override
-    public List<ProductBase> findAll(int pageNum, int elementNum) {
-        return productBaseRepository.findAll(PageRequest.of(pageNum,elementNum)).getContent();
-    }
 
     @Override
     public List<ProductBase> findAllByType(ProductType type, int pageNum, int elementNum) {

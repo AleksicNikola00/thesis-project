@@ -12,6 +12,6 @@ public interface ProductBaseService {
     public void deleteAll();
     public ProductBase findByModel(String model);
     public List<ProductBase> findAllByType(ProductType type);
-    public List<ProductBase> findAll(int pageNum, int elementNum);
     public List<ProductBase> findAllByType(ProductType clothes, int pageNum, int i);
+    public ProductBase findByModelAndBrand(String model, String brand);
 }

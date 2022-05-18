@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ProductBaseRepository extends JpaRepository<ProductBase, Long> {
     public ProductBase findProductBaseByModel(String model);
+    public ProductBase findProductBaseByModelAndBrand(String model, String brand);
     public List<ProductBase> findAllByProductType(ProductType productType);
     public List<ProductBase> findAllByProductType(ProductType productType, Pageable pageable);
 }
