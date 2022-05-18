@@ -14,8 +14,6 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
- 
-
   getClothes(): Observable<IProduct[]>{
       return this.http.get<IProduct[]>(environment.host + this.url + "/clothes");
   }
@@ -30,7 +28,11 @@ export class ProductService {
 
   getClothesPage(pageNum: number): Observable<IProduct[]>{
     return this.http.get<IProduct[]>(environment.host + this.url + "/clothes" + `/${pageNum}`);
-}
+  }
 
+
+  getShoesPage(pageNum: number): Observable<IProduct[]>{
+    return this.http.get<IProduct[]>(environment.host + this.url + "/shoes" + `/${pageNum}`);
+  }
 
 }
