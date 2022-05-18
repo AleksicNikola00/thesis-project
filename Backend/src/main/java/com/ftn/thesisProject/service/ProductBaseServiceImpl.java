@@ -38,24 +38,14 @@ public class ProductBaseServiceImpl implements ProductBaseService {
         productBaseRepository.deleteAll();
     }
 
-    @Override
-    public ProductBase findByModel(String model) {
-        return productBaseRepository.findProductBaseByModel(model);
-    }
 
     @Override
-    public ProductBase findByModelAndBrand(String model, String brand){
+    public ProductBase find(String model, String brand){
         return  productBaseRepository.findProductBaseByModelAndBrand(model,brand);
     }
 
     @Override
-    public List<ProductBase> findAllByType(ProductType type) {
-        return  productBaseRepository.findAllByProductType(type);
-    }
-
-
-    @Override
-    public List<ProductBase> findAllByType(ProductType type, int pageNum, int elementNum) {
+    public List<ProductBase> findByType(ProductType type, int pageNum, int elementNum) {
         return productBaseRepository.findAllByProductType(type,PageRequest.of(pageNum,elementNum));
     }
 

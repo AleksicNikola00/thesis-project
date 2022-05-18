@@ -33,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/clothes/{pageNum}")
     public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum){
-        var products = productBaseService.findAllByType(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE);
+        var products = productBaseService.findByType(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
@@ -43,34 +43,12 @@ public class ProductController {
 
     @GetMapping("/shoes/{pageNum}")
     public ResponseEntity<List<ProductBaseDTO>> getShoesPageable(@PathVariable int pageNum){
-        var products = productBaseService.findAllByType(ProductType.SHOES,pageNum, Constants.ELEMENTS_PER_PAGE);
+        var products = productBaseService.findByType(ProductType.SHOES,pageNum, Constants.ELEMENTS_PER_PAGE);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
 
         return new ResponseEntity<>(retProducts, HttpStatus.OK);
     }
-
-    @GetMapping("/clothes")
-    public ResponseEntity<List<ProductBaseDTO>> getClothes(){
-        var products = productBaseService.findAllByType(ProductType.CLOTHES);
-        var retProducts = new ArrayList<ProductBaseDTO>();
-        for(ProductBase productBase : products)
-            retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
-
-        return new ResponseEntity<>(retProducts,HttpStatus.OK);
-    }
-
-    @GetMapping("/shoes")
-    public ResponseEntity<List<ProductBaseDTO>> getShoes(){
-        var products = productBaseService.findAllByType(ProductType.SHOES);
-        var retProducts = new ArrayList<ProductBaseDTO>();
-        for(ProductBase productBase : products)
-            retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
-
-        return new ResponseEntity<>(retProducts,HttpStatus.OK);
-    }
-
-
 
 }

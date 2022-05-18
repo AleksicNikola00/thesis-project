@@ -10,8 +10,6 @@ public interface ProductBaseService {
     public ProductBase getById(Long id);
     public void save(ProductBase productBase);
     public void deleteAll();
-    public ProductBase findByModel(String model);
-    public List<ProductBase> findAllByType(ProductType type);
-    public List<ProductBase> findAllByType(ProductType clothes, int pageNum, int i);
-    public ProductBase findByModelAndBrand(String model, String brand);
+    public List<ProductBase> findByType(ProductType clothes, int pageNum, int i);
+    public ProductBase find(String model, String brand);
 }

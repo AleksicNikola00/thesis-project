@@ -59,7 +59,7 @@ public class UpdateDatabaseService {
     }
 
     private void saveProduct(Product product){
-        ProductBase productBase = productBaseService.findByModelAndBrand(product.getProductBase().getModel(),product.getProductBase().getBrand());
+        ProductBase productBase = productBaseService.find(product.getProductBase().getModel(),product.getProductBase().getBrand());
         if(productBase != null)
             product.setProductBase(productBase);
 
