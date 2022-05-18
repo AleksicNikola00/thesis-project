@@ -22,10 +22,15 @@ export class ProductService {
 
   getShoes(): Observable<IProduct[]>{
     return this.http.get<IProduct[]>(environment.host + this.url + "/shoes");
-}
+  }
 
   getProductDetails(id: number): Observable<IProductDetails>{
       return this.http.get<IProductDetails>(environment.host + this.url + `/${id}`);
   }
+
+  getClothesPage(pageNum: number): Observable<IProduct[]>{
+    return this.http.get<IProduct[]>(environment.host + this.url + "/clothes" + `/${pageNum}`);
+}
+
 
 }

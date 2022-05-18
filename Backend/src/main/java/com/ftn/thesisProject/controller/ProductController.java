@@ -3,6 +3,7 @@ package com.ftn.thesisProject.controller;
 import com.ftn.thesisProject.dtos.ProductBaseDTO;
 import com.ftn.thesisProject.model.Product;
 import com.ftn.thesisProject.model.ProductBase;
+import com.ftn.thesisProject.model.constants.Constants;
 import com.ftn.thesisProject.model.enumerations.ProductType;
 import com.ftn.thesisProject.service.ProductBaseService;
 import com.ftn.thesisProject.service.ProductSpecificService;
@@ -24,9 +25,15 @@ public class ProductController {
         this.productBaseService = productBaseService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<ProductBaseDTO>> getProducts(){
-        var products = productBaseService.getAll();
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductBase> getProduct(@PathVariable Long id){
+        return new ResponseEntity<>(productBaseService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/clothes/{pageNum}")
+    public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum){
+        var products = productBaseService.findAllByType(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
@@ -34,9 +41,14 @@ public class ProductController {
         return new ResponseEntity<>(retProducts, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductBase> getProduct(@PathVariable Long id){
-        return new ResponseEntity<>(productBaseService.getById(id), HttpStatus.OK);
+    @GetMapping("/shoes/{pageNum}")
+    public ResponseEntity<List<ProductBaseDTO>> getShoesPageable(@PathVariable int pageNum){
+        var products = productBaseService.findAllByType(ProductType.SHOES,pageNum, Constants.ELEMENTS_PER_PAGE);
+        var retProducts = new ArrayList<ProductBaseDTO>();
+        for(ProductBase productBase : products)
+            retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
+
+        return new ResponseEntity<>(retProducts, HttpStatus.OK);
     }
 
     @GetMapping("/clothes")
@@ -58,5 +70,7 @@ public class ProductController {
 
         return new ResponseEntity<>(retProducts,HttpStatus.OK);
     }
+
+
 
 }

@@ -5,6 +5,8 @@ import com.ftn.thesisProject.model.ProductBase;
 import com.ftn.thesisProject.model.enumerations.ProductType;
 import com.ftn.thesisProject.repository.ProductBaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +22,6 @@ public class ProductBaseServiceImpl implements ProductBaseService {
         this.productBaseRepository = productBaseRepository;
     }
 
-    @Override
-    public List<ProductBase> getAll() {
-        return productBaseRepository.findAll();
-    }
 
     @Override
     public ProductBase getById(Long id) {
@@ -33,11 +31,6 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     @Override
     public void save(ProductBase productBase) {
         productBaseRepository.save(productBase);
-    }
-
-    @Override
-    public void saveAll(List<ProductBase> productBases) {
-        productBaseRepository.saveAll(productBases);
     }
 
     @Override
@@ -53,6 +46,16 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     @Override
     public List<ProductBase> findAllByType(ProductType type) {
         return  productBaseRepository.findAllByProductType(type);
+    }
+
+    @Override
+    public List<ProductBase> findAll(int pageNum, int elementNum) {
+        return productBaseRepository.findAll(PageRequest.of(pageNum,elementNum)).getContent();
+    }
+
+    @Override
+    public List<ProductBase> findAllByType(ProductType type, int pageNum, int elementNum) {
+        return productBaseRepository.findAllByProductType(type,PageRequest.of(pageNum,elementNum));
     }
 
 
