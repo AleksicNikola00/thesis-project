@@ -53,10 +53,4 @@ public class ProductBaseServiceImpl implements ProductBaseService {
             return productBaseRepository.findAllByProductType(type,PageRequest.of(pageNum,elementNum));
     }
 
-    @Override
-    public List<ProductBase> findByType(ProductType type, int pageNum, int elementNum) {
-        return productBaseRepository.findAllByProductType(type,PageRequest.of(pageNum,elementNum));
-    }
-
-
 }

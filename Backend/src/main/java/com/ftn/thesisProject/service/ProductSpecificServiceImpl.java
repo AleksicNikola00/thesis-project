@@ -23,18 +23,8 @@ public class ProductSpecificServiceImpl implements ProductSpecificService{
     }
 
     @Override
-    public ProductSpecific getById(Long id) {
-        return productSpecificRepository.getById(id);
-    }
-
-    @Override
     public void save(ProductSpecific productSpecific) {
         productSpecificRepository.save(productSpecific);
-    }
-
-    @Override
-    public void saveAll(List<ProductSpecific> productSpecifics) {
-        productSpecificRepository.saveAll(productSpecifics);
     }
 
     @Override

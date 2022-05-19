@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ProductBaseRepository extends JpaRepository<ProductBase, Long> {
-    public ProductBase findProductBaseByModel(String model);
-    public ProductBase findProductBaseByModelAndBrand(String model, String brand);
-    public List<ProductBase> findAllByProductType(ProductType productType);
-    public List<ProductBase> findAllByProductType(ProductType productType, Pageable pageable);
-    public List<ProductBase> findAllByProductTypeAndBrandIn(ProductType productType,List<String> brands, Pageable pageable);
+    ProductBase findProductBaseByModel(String model);
+    ProductBase findProductBaseByModelAndBrand(String model, String brand);
+    List<ProductBase> findAllByProductType(ProductType productType);
+    List<ProductBase> findAllByProductType(ProductType productType, Pageable pageable);
+    List<ProductBase> findAllByProductTypeAndBrandIn(ProductType productType,List<String> brands, Pageable pageable);
 }

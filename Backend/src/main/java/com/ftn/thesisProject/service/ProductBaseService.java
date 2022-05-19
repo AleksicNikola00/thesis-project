@@ -7,11 +7,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ProductBaseService {
-    public ProductBase getById(Long id);
-    public void save(ProductBase productBase);
-    public void deleteAll();
-    public List<ProductBase> findByType(ProductType clothes, int pageNum, int i);
-    public ProductBase find(String model, String brand);
-
-    public List<ProductBase> findFiltered(ProductType clothes, int pageNum, int elementsPerPage, String[] filterParams);
+    ProductBase getById(Long id);
+    void save(ProductBase productBase);
+    void deleteAll();
+    ProductBase find(String model, String brand);
+    List<ProductBase> findFiltered(ProductType clothes, int pageNum, int elementsPerPage, String[] filterParams);
 }
