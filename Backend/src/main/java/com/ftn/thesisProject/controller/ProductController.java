@@ -1,12 +1,10 @@
 package com.ftn.thesisProject.controller;
 
 import com.ftn.thesisProject.dtos.ProductBaseDTO;
-import com.ftn.thesisProject.model.Product;
 import com.ftn.thesisProject.model.ProductBase;
 import com.ftn.thesisProject.model.constants.Constants;
 import com.ftn.thesisProject.model.enumerations.ProductType;
 import com.ftn.thesisProject.service.ProductBaseService;
-import com.ftn.thesisProject.service.ProductSpecificService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
