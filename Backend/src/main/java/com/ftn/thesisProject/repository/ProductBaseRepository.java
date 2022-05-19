@@ -12,11 +12,9 @@ import java.util.List;
 
 public interface ProductBaseRepository extends JpaRepository<ProductBase, Long> {
 
-    @Query("SELECT distinct p.brand,count(p.id) FROM ProductBase p where p.productType=?1 group by p.brand")
+    @Query("SELECT distinct p.brand as brand,count(p.id) as count FROM ProductBase p where p.productType=?1 group by p.brand")
     List<BrandMap> findBrandMap(ProductType productType);
-    ProductBase findProductBaseByModel(String model);
     ProductBase findProductBaseByModelAndBrand(String model, String brand);
-    List<ProductBase> findAllByProductType(ProductType productType);
     List<ProductBase> findAllByProductType(ProductType productType, Pageable pageable);
     List<ProductBase> findAllByProductTypeAndBrandIn(ProductType productType,List<String> brands, Pageable pageable);
 }

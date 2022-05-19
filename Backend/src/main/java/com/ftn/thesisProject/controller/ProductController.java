@@ -32,8 +32,13 @@ public class ProductController {
     }
 
     @GetMapping("/clothes")
-    public ResponseEntity<List<BrandMap>> getFilterMap(){
+    public ResponseEntity<List<BrandMap>> getClothesFilterMap(){
         return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.CLOTHES),HttpStatus.OK);
+    }
+
+    @GetMapping("/shoes")
+    public ResponseEntity<List<BrandMap>> getShoesFilterMap(){
+        return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.SHOES),HttpStatus.OK);
     }
 
     @GetMapping("/clothes/{pageNum}")
