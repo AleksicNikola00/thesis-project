@@ -31,12 +31,12 @@ public class ProductController {
         return new ResponseEntity<>(productBaseService.getById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/clothes")
+    @GetMapping("/clothes/brands")
     public ResponseEntity<List<BrandMap>> getClothesFilterMap(){
         return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.CLOTHES),HttpStatus.OK);
     }
 
-    @GetMapping("/shoes")
+    @GetMapping("/shoes/brands")
     public ResponseEntity<List<BrandMap>> getShoesFilterMap(){
         return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.SHOES),HttpStatus.OK);
     }

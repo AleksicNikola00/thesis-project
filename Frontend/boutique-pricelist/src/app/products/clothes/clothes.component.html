@@ -2,7 +2,7 @@
     <div class="row m-0 mt-5" style="height: 1020px;">
 
       <div class="col-3">
-          <app-filter (filterParamsEvent)="setFilterParams($event)"></app-filter>
+          <app-filter [filterType]="'clothes'" (filterParamsEvent)="setFilterParams($event)"></app-filter>
       </div>
      
       <div class="col-9">

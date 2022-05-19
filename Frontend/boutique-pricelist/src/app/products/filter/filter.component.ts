@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { IBrandMap } from 'src/app/model/IBrandMap';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-filter',
@@ -7,18 +9,24 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  brands: string[] = [
-    "Trussardi","Timberland","Nike","Adidas","Fila","Replay","Reebok","Converse","Versace","Prada","Dior","Givenchy"
-  ]
-
   @Output() filterParamsEvent: EventEmitter<string[]>  = new EventEmitter<string[]>();
-  
+  @Input() filterType: string = "";//clothes/shoes
+
+  brands: IBrandMap[] = []
+
   filterParams: string[] = [];
   
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.productService.getBrandMap(this.filterType).subscribe(
+      value => this.brands = value,
+      error => console.log(error)
+    );
   }
+
+
+
 
   filter(event: any,item: string): void{
     if(event.target.checked)

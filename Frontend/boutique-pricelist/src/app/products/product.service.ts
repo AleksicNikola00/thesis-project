@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IBrandMap } from '../model/IBrandMap';
 import { IProduct } from '../model/IProduct';
 import { IProductDetails } from '../model/IProductDetails';
 
@@ -37,6 +38,10 @@ export class ProductService {
     let queryParams = new HttpParams();
     queryParams = queryParams.append('filterParams',filterParams.join(', '));
     return this.http.get<IProduct[]>(environment.host + this.url + "/shoes" + `/${pageNum}`, {params:queryParams});
+  }
+
+  getBrandMap(filterType: string): Observable<IBrandMap[]>{
+    return this.http.get<IBrandMap[]>(environment.host + this.url + `/${filterType}/brands`);
   }
 
 }
