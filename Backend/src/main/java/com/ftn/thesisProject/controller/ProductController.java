@@ -33,9 +33,6 @@ public class ProductController {
 
     @GetMapping("/clothes/{pageNum}")
     public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
-        if(filterParams != null)
-        for(var param : filterParams)
-            System.out.println(param);
         var products = productBaseService.findFiltered(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE,filterParams);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)

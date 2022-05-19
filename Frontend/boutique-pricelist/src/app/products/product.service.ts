@@ -35,7 +35,7 @@ export class ProductService {
 
   getShoesPage(pageNum: number,filterParams: string[] = []): Observable<IProduct[]>{
     let queryParams = new HttpParams();
-    queryParams.append('filterParams',filterParams.join(', '));
+    queryParams = queryParams.append('filterParams',filterParams.join(', '));
     return this.http.get<IProduct[]>(environment.host + this.url + "/shoes" + `/${pageNum}`, {params:queryParams});
   }
 

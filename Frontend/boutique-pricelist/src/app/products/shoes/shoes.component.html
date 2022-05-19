@@ -2,11 +2,11 @@
     <div class="row m-0 mt-5" style="height: 1020px;">
 
       <div class="col-3">
-          <app-filter></app-filter>
+          <app-filter (filterParamsEvent)="setFilterParams($event)"></app-filter>
       </div>
      
       <div class="col-9">
-        <app-product-list [products]="shoes" [productType]="'shoes'"></app-product-list>
+        <app-product-list  [filterParams]="filterParams" [products]="shoes" [productType]="'shoes'"></app-product-list>
       </div>  
 
     </div>

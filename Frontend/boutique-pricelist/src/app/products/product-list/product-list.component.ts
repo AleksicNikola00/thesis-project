@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IProduct } from 'src/app/model/IProduct';
 import { ProductService } from '../product.service';
 
@@ -7,7 +7,7 @@ import { ProductService } from '../product.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit,OnChanges {
   
   @Input() products: IProduct[] = [];
   @Input() productType: string = "";
@@ -15,6 +15,10 @@ export class ProductListComponent implements OnInit {
   pageNum: number = 1;
 
   constructor(private _productService : ProductService) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.pageNum = 1;
+  }
 
   ngOnInit(): void {
 
@@ -27,6 +31,7 @@ export class ProductListComponent implements OnInit {
         this.getClothes();
       else
         this.getShoes();
+
     }
       
 
@@ -44,10 +49,14 @@ export class ProductListComponent implements OnInit {
 
   getClothes(){
     this._productService.getClothesPage(this.pageNum,this.filterParams).subscribe(
-      value => {this.products = this.products.concat(value);
-              this.pageNum = this.pageNum + 1},
+      value => this.loadProductsPage(value),
       error => console.log(error)
     );
+  }
+
+  loadProductsPage(newProducts: IProduct[]){
+    this.products = this.products.concat(newProducts);
+    this.pageNum = this.pageNum + 1;
   }
 
 }

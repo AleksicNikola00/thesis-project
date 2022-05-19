@@ -7,7 +7,9 @@
             <img [src]="product.imgUrl" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{product.brand}}</h5>
-              <p class="card-text">{{product.model}}</p>
+              <p class="card-text">
+                {{ (product.model.length>65)? (product.model | slice:0:65)+'...':(product.model) }}
+              </p>
             </div>
             <div class="card-footer">
               <small class="text-muted"><b>{{product.type}}</b></small>
