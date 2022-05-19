@@ -11,6 +11,9 @@ export class ClothesComponent implements OnInit {
 
   clothes: IProduct[] = [];
 
+  filterParams: string[] = [];
+  
+
   constructor(private _productService : ProductService) { }
 
   ngOnInit(): void {
@@ -18,6 +21,11 @@ export class ClothesComponent implements OnInit {
      value => this.clothes = value,
      error => console.log(error)
    );
+  }
+
+  setFilterParams(params: string[]){
+    this.filterParams = params;
+    alert(this.filterParams);
   }
 
 }

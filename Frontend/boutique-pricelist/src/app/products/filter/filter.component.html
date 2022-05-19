@@ -4,7 +4,7 @@
       <h4 class="card-title center-text">Filter</h4>
       <h6 class=""> Brands</h6>
       <div *ngFor="let item of brands">
-        <input class="form-check-input ms-2" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+        <input (change)="filter($event,item)" class="form-check-input ms-2" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
         <label class="ms-2">{{item}}</label>
       </div>
     </div>
