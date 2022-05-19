@@ -12,4 +12,5 @@ public interface ProductBaseRepository extends JpaRepository<ProductBase, Long> 
     public ProductBase findProductBaseByModelAndBrand(String model, String brand);
     public List<ProductBase> findAllByProductType(ProductType productType);
     public List<ProductBase> findAllByProductType(ProductType productType, Pageable pageable);
+    public List<ProductBase> findAllByProductTypeAndBrandIn(ProductType productType,List<String> brands, Pageable pageable);
 }

@@ -10,14 +10,26 @@ import { ProductService } from '../product.service';
 export class ClothesComponent implements OnInit {
 
   clothes: IProduct[] = [];
+  clothesPage: number = 0;
+  filterParams: string[] = [];
+  
 
   constructor(private _productService : ProductService) { }
 
   ngOnInit(): void {
-   this._productService.getClothesPage(0).subscribe(
+   this._productService.getClothesPage(this.clothesPage).subscribe(
      value => this.clothes = value,
      error => console.log(error)
    );
   }
+
+  setFilterParams(params: string[]){
+    this.filterParams = params;
+    this._productService.getClothesPage(this.clothesPage,this.filterParams).subscribe(
+      value => this.clothes = value,
+      error => console.log(error)
+    );
+  }
+
 
 }

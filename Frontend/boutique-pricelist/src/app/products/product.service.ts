@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -26,13 +26,17 @@ export class ProductService {
       return this.http.get<IProductDetails>(environment.host + this.url + `/${id}`);
   }
 
-  getClothesPage(pageNum: number): Observable<IProduct[]>{
-    return this.http.get<IProduct[]>(environment.host + this.url + "/clothes" + `/${pageNum}`);
+  getClothesPage(pageNum: number,filterParams: string[] = []): Observable<IProduct[]>{
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('filterParams',filterParams.join(', '));
+    return this.http.get<IProduct[]>(environment.host + this.url + "/clothes" + `/${pageNum}`, {params:queryParams});
   }
 
 
-  getShoesPage(pageNum: number): Observable<IProduct[]>{
-    return this.http.get<IProduct[]>(environment.host + this.url + "/shoes" + `/${pageNum}`);
+  getShoesPage(pageNum: number,filterParams: string[] = []): Observable<IProduct[]>{
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('filterParams',filterParams.join(', '));
+    return this.http.get<IProduct[]>(environment.host + this.url + "/shoes" + `/${pageNum}`, {params:queryParams});
   }
 
 }

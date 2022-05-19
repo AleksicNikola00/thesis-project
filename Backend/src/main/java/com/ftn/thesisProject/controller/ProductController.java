@@ -32,8 +32,8 @@ public class ProductController {
     }
 
     @GetMapping("/clothes/{pageNum}")
-    public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum){
-        var products = productBaseService.findByType(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE);
+    public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
+        var products = productBaseService.findFiltered(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE,filterParams);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
@@ -41,9 +41,12 @@ public class ProductController {
         return new ResponseEntity<>(retProducts, HttpStatus.OK);
     }
 
+
+
+
     @GetMapping("/shoes/{pageNum}")
-    public ResponseEntity<List<ProductBaseDTO>> getShoesPageable(@PathVariable int pageNum){
-        var products = productBaseService.findByType(ProductType.SHOES,pageNum, Constants.ELEMENTS_PER_PAGE);
+    public ResponseEntity<List<ProductBaseDTO>> getShoesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
+        var products = productBaseService.findFiltered(ProductType.SHOES,pageNum, Constants.ELEMENTS_PER_PAGE,filterParams);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
