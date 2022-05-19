@@ -31,6 +31,19 @@ public class ProductController {
         return new ResponseEntity<>(productBaseService.getById(id), HttpStatus.OK);
     }
 
+<<<<<<< Updated upstream
+=======
+    @GetMapping("/clothes")
+    public ResponseEntity<List<BrandMap>> getClothesFilterMap(){
+        return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.CLOTHES),HttpStatus.OK);
+    }
+
+    @GetMapping("/shoes")
+    public ResponseEntity<List<BrandMap>> getShoesFilterMap(){
+        return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.SHOES),HttpStatus.OK);
+    }
+
+>>>>>>> Stashed changes
     @GetMapping("/clothes/{pageNum}")
     public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
         var products = productBaseService.findFiltered(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE,filterParams);
