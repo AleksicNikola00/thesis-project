@@ -8,7 +8,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class FilterComponent implements OnInit {
 
   brands: string[] = [
-    "Nike","Adidas","Fila","Replay","Reebok","Converse","Versace","Prada","Dior","Givenchy"
+    "Trussardi","Timberland","Nike","Adidas","Fila","Replay","Reebok","Converse","Versace","Prada","Dior","Givenchy"
   ]
 
   @Output() filterParamsEvent: EventEmitter<string[]>  = new EventEmitter<string[]>();
@@ -26,7 +26,7 @@ export class FilterComponent implements OnInit {
     else
       this.filterParams = this.filterParams.filter(x => x!=item);
     
-      this.filterParamsEvent.emit(this.filterParams);
+    this.filterParamsEvent.emit(this.filterParams);
   }
 
 }

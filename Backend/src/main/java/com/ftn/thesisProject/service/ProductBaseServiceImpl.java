@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -42,6 +43,14 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     @Override
     public ProductBase find(String model, String brand){
         return  productBaseRepository.findProductBaseByModelAndBrand(model,brand);
+    }
+
+    @Override
+    public List<ProductBase> findFiltered(ProductType type, int pageNum, int elementNum, String[] filterParams) {
+        if(filterParams!=null && filterParams.length!= 0)
+            return productBaseRepository.findAllByProductTypeAndBrandIn(type, Arrays.asList(filterParams),PageRequest.of(pageNum,elementNum));
+        else
+            return productBaseRepository.findAllByProductType(type,PageRequest.of(pageNum,elementNum));
     }
 
     @Override

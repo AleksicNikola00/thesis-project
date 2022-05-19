@@ -25,7 +25,10 @@ export class ClothesComponent implements OnInit {
 
   setFilterParams(params: string[]){
     this.filterParams = params;
-    alert(this.filterParams);
+    this._productService.getClothesPage(0,this.filterParams).subscribe(
+      value => this.clothes = value,
+      error => console.log(error)
+    );
   }
 
 }
