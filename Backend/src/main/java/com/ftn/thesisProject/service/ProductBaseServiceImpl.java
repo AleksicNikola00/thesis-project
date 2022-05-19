@@ -1,6 +1,7 @@
 package com.ftn.thesisProject.service;
 
 
+import com.ftn.thesisProject.model.BrandMap;
 import com.ftn.thesisProject.model.ProductBase;
 import com.ftn.thesisProject.model.enumerations.ProductType;
 import com.ftn.thesisProject.repository.ProductBaseRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -51,6 +53,11 @@ public class ProductBaseServiceImpl implements ProductBaseService {
             return productBaseRepository.findAllByProductTypeAndBrandIn(type, Arrays.asList(filterParams),PageRequest.of(pageNum,elementNum));
         else
             return productBaseRepository.findAllByProductType(type,PageRequest.of(pageNum,elementNum));
+    }
+
+    @Override
+    public List<BrandMap> getFilterMap(ProductType type) {
+        return productBaseRepository.findBrandMap(type);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.ftn.thesisProject.controller;
 
 import com.ftn.thesisProject.dtos.ProductBaseDTO;
+import com.ftn.thesisProject.model.BrandMap;
 import com.ftn.thesisProject.model.ProductBase;
 import com.ftn.thesisProject.model.constants.Constants;
 import com.ftn.thesisProject.model.enumerations.ProductType;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RequestMapping("/products")
@@ -27,6 +29,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductBase> getProduct(@PathVariable Long id){
         return new ResponseEntity<>(productBaseService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/clothes")
+    public ResponseEntity<List<BrandMap>> getFilterMap(){
+        return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.CLOTHES),HttpStatus.OK);
     }
 
     @GetMapping("/clothes/{pageNum}")
