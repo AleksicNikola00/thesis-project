@@ -60,4 +60,9 @@ public class ProductBaseServiceImpl implements ProductBaseService {
         return productBaseRepository.findBrandMap(type);
     }
 
+    @Override
+    public List<ProductBase> search(String criteria,int pageNum,int elementNum) {
+        return productBaseRepository.searchByCriteria(criteria,PageRequest.of(pageNum,elementNum));
+    }
+
 }

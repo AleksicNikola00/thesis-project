@@ -31,6 +31,11 @@ public class ProductController {
         return new ResponseEntity<>(productBaseService.getById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/search/{pageNum}")
+    public ResponseEntity<List<ProductBase>> search(@PathVariable int pageNum,@RequestParam String criteria){
+        return new ResponseEntity<>(productBaseService.search(criteria,pageNum,Constants.ELEMENTS_PER_PAGE_SEARCH),HttpStatus.OK);
+    }
+
     @GetMapping("/clothes/brands")
     public ResponseEntity<List<BrandMap>> getClothesFilterMap(){
         return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.CLOTHES),HttpStatus.OK);
