@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   searchParam: string = "";
 
@@ -16,7 +16,10 @@ export class SearchComponent implements OnInit {
 
 
   search(): void{
-    alert(this.searchParam);
+    this._router.navigate(
+      ['/products/mixed'],
+      {queryParams: {criteria: this.searchParam}}
+    );
   }
 
 }

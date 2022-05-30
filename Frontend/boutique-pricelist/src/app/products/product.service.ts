@@ -19,8 +19,10 @@ export class ProductService {
       return this.http.get<IProduct[]>(environment.host + this.url + "/clothes");
   }
 
-  getShoes(): Observable<IProduct[]>{
-    return this.http.get<IProduct[]>(environment.host + this.url + "/shoes");
+  searchProducts(criteria: string, pageNum: number): Observable<IProduct[]>{
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('criteria',criteria);
+    return this.http.get<IProduct[]>(environment.host + this.url + "/search" + `/${pageNum}`,{params:queryParams});
   }
 
   getProductDetails(id: number): Observable<IProductDetails>{

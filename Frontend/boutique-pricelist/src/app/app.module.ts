@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { SearchComponent } from './navbar/search/search.component';
 import { FormsModule } from '@angular/forms';
+import { MixedComponent } from './products/mixed/mixed.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     FilterComponent,
     ProductListComponent,
     ProductDetailsComponent,
-    SearchComponent
+    SearchComponent,
+    MixedComponent
   ],
   imports: [
     BrowserModule,

@@ -32,8 +32,13 @@ public class ProductController {
     }
 
     @GetMapping("/search/{pageNum}")
-    public ResponseEntity<List<ProductBase>> search(@PathVariable int pageNum,@RequestParam String criteria){
-        return new ResponseEntity<>(productBaseService.search(criteria,pageNum,Constants.ELEMENTS_PER_PAGE_SEARCH),HttpStatus.OK);
+    public ResponseEntity<List<ProductBaseDTO>> search(@PathVariable int pageNum,@RequestParam String criteria){
+        var products = productBaseService.search(criteria,pageNum,Constants.ELEMENTS_PER_PAGE);
+        var retProducts = new ArrayList<ProductBaseDTO>();
+        for(ProductBase productBase : products)
+            retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
+
+        return new ResponseEntity<>(retProducts, HttpStatus.OK);
     }
 
     @GetMapping("/clothes/brands")
