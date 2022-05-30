@@ -31,12 +31,7 @@ export class ProductListComponent implements OnInit,OnChanges {
         this.getClothes();
       else
         this.getShoes();
-
     }
-      
-
-    
-    
   }
 
   getShoes(){

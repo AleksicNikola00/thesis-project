@@ -12,6 +12,8 @@ import { FilterComponent } from './products/filter/filter.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { SearchComponent } from './navbar/search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     NavbarComponent,
     FilterComponent,
     ProductListComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
