@@ -17,18 +17,24 @@ export class ClothesComponent implements OnInit {
   constructor(private _productService : ProductService) { }
 
   ngOnInit(): void {
-   this._productService.getClothesPage(this.clothesPage).subscribe(
-     value => this.clothes = value,
+    this.getClothesPage(null);
+  }
+
+  getClothesPage(event: any): void{
+    this._productService.getClothesPage(this.clothesPage,this.filterParams).subscribe(
+     value => {
+        this.clothes = this.clothes.concat(value);
+        this.clothesPage = this.clothesPage + 1;
+      },
      error => console.log(error)
    );
   }
 
   setFilterParams(params: string[]){
     this.filterParams = params;
-    this._productService.getClothesPage(this.clothesPage,this.filterParams).subscribe(
-      value => this.clothes = value,
-      error => console.log(error)
-    );
+    this.clothesPage = 0;
+    this.clothes = [ ];
+    this.getClothesPage(null);
   }
 
 

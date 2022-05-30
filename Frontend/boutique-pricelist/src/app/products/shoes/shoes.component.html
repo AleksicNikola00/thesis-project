@@ -6,7 +6,7 @@
       </div>
      
       <div class="col-9">
-        <app-product-list  [filterParams]="filterParams" [products]="shoes" [productType]="'shoes'"></app-product-list>
+        <app-product-list  (newPageEvent)="getShoesPage($event)" [products]="shoes" ></app-product-list>
       </div>  
 
     </div>
