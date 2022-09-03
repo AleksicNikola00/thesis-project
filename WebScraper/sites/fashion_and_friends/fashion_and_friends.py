@@ -9,23 +9,15 @@ import requests
 
 from model.Product import Product
 
-# form 32.232,00 RSD
+
 from model.ProductBase import ProductBase
 from model.ProductSpecific import ProductSpecific
-from model.enumerations.product_type import ProductType
+from sites.scraper import Scraper, convert_to_num
 
 
-def convert_to_num(number_string):
-    num = number_string.split(' ')[0]
-    num = num.replace('.', '')
-    num = num.split(',')[0]
-    return float(num)
-
-
-class FashionAndFriendsScraper:
-    def __init__(self, driver):
-        self.driver = driver
-        self.products = []
+class FashionAndFriendsScraper(Scraper):
+    def __init__(self):
+        super().__init__()
 
     def land_first_page(self, base_url):
         self.driver.get(base_url)
@@ -54,23 +46,6 @@ class FashionAndFriendsScraper:
         except:
             print('Subscription pop up did not show!')
 
-    def scroll_down(self):
-        # Get scroll height
-        last_height = self.driver.execute_script("return document.body.scrollHeight")
-
-        while True:
-            # Scroll down to bottom
-            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
-            # Wait to load page
-            time.sleep(constants.SCROLL_PAUSE_TIME)
-
-            # Calculate new scroll height and compare with last scroll height
-            new_height = self.driver.execute_script("return document.body.scrollHeight")
-            if new_height == last_height:
-                break
-            last_height = new_height
-
     def collect_data(self, product_type):
         shoes = self.driver.find_elements(By.XPATH,
                                           '//li[@class="item product product-item-info product-item col-lg-4 col-md-4 col-sm-4 col-xs-6"]')
@@ -88,16 +63,9 @@ class FashionAndFriendsScraper:
             price = convert_to_num(product_info.find('span', class_='price').text)
             image_src = product_soup.find('img', alt='main product photo')['src']
             self.products.append(
-                Product(ProductBase(brand=brand, model=model, product_type=product_type.value, img_src=image_src), ProductSpecific(link=link, price=price)))
+                Product(ProductBase(brand=brand, model=model, product_type=product_type.value, img_src=image_src),
+                        ProductSpecific(link=link, price=price)))
         except:
             print('Exception on link: ' + link)
 
-    def serialize_to_json(self, path):
-        with open('../jsons/' + path, 'w+') as write:
-            json.dump(self.products, write, default=vars)
-
-    def print_list(self):
-        for product in self.products:
-            product.to_string()
-            print('\n')
 

@@ -21,13 +21,11 @@ export class ClothesComponent implements OnInit {
   }
 
   getClothesPage(event: any): void{
-    this._productService.getClothesPage(this.clothesPage,this.filterParams).subscribe(
-     value => {
-        this.clothes = this.clothes.concat(value);
-        this.clothesPage = this.clothesPage + 1;
-      },
-     error => console.log(error)
-   );
+    this._productService.getClothesPage(this.clothesPage,this.filterParams).subscribe({
+      next: (value) => {this.clothes = this.clothes.concat(value);
+        this.clothesPage = this.clothesPage + 1;},
+      error: (e) =>console.log(e)
+    });
   }
 
   setFilterParams(params: string[]){
