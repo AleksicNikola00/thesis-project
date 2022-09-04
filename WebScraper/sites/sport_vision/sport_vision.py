@@ -20,9 +20,9 @@ class SportVisionScraper(Scraper):
     def land_first_page(self, base_url):
         self.driver.get(base_url)
 
-    def run_script(self, product_type):
+    def collect_data(self, product_type):
         while self.driver.find_element_by_css_selector("[class='icon-caret-right']"):
-            self.collect_data(product_type=product_type)
+            self.collect_page_data(product_type=product_type)
             self.click_next()
             time.sleep(constants.RELOAD_TIME)
 
@@ -43,7 +43,7 @@ class SportVisionScraper(Scraper):
         cookie_button.click()
         time.sleep(2)
 
-    def collect_data(self, product_type):
+    def collect_page_data(self, product_type):
         products = self.driver.find_elements_by_css_selector("[class='product-link']")
 
         for product in products:

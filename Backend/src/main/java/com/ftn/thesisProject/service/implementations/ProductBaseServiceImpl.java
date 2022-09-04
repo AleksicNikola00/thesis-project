@@ -1,10 +1,11 @@
-package com.ftn.thesisProject.service;
+package com.ftn.thesisProject.service.implementations;
 
 
 import com.ftn.thesisProject.model.BrandMap;
 import com.ftn.thesisProject.model.ProductBase;
 import com.ftn.thesisProject.model.enumerations.ProductType;
 import com.ftn.thesisProject.repository.ProductBaseRepository;
+import com.ftn.thesisProject.service.ProductBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

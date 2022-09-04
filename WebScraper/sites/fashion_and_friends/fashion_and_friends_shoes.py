@@ -4,8 +4,8 @@ from sites.fashion_and_friends.fashion_and_friends import FashionAndFriendsScrap
 
 
 class FashionAndFriendsShoes(FashionAndFriendsScraper):
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self):
+        super().__init__()
 
     def get_man_shoes(self, print_data=True):
         self.land_first_page(constants.BASE_URL_FASHION_MAN_SHOES)

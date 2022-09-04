@@ -3,7 +3,6 @@ import time
 
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
 
 import constants
 
@@ -18,9 +17,7 @@ def convert_to_num(number_string):
 
 class Scraper:
     def __init__(self):
-        chrome_options = Options()
-        chrome_options.add_experimental_option('detach', True)
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.products = []
 
     def scroll_down(self):

@@ -1,14 +1,15 @@
-package com.ftn.thesisProject.service;
+package com.ftn.thesisProject.service.implementations;
 
 import com.ftn.thesisProject.model.ProductSpecific;
 import com.ftn.thesisProject.repository.ProductSpecificRepository;
+import com.ftn.thesisProject.service.ProductSpecificService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductSpecificServiceImpl implements ProductSpecificService{
+public class ProductSpecificServiceImpl implements ProductSpecificService {
 
     private ProductSpecificRepository productSpecificRepository;
 
