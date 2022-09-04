@@ -6,3 +6,5 @@ BASE_URL_SPORT_VISION = 'https://www.sportvision.rs'
 
 
 SCROLL_PAUSE_TIME = 2
+
+RELOAD_TIME = 4
