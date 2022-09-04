@@ -16,8 +16,8 @@ from sites.scraper import Scraper, convert_to_num
 
 
 class FashionAndFriendsScraper(Scraper):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, driver):
+        super().__init__(driver)
 
     def land_first_page(self, base_url):
         self.driver.get(base_url)

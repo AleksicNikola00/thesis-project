@@ -4,8 +4,8 @@ from sites.sport_vision.sport_vision import SportVisionScraper
 
 
 class SportVisionClothes(SportVisionScraper):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, driver):
+        super().__init__(driver)
 
     def get_man_clothes(self, print_data=True):
         self.land_first_page(constants.BASE_URL_SPORT_VISION_MAN_CLOTHES)

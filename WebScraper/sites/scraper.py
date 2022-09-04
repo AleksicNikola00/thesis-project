@@ -1,9 +1,6 @@
 import json
 import time
 
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-
 import constants
 
 
@@ -16,8 +13,8 @@ def convert_to_num(number_string):
 
 
 class Scraper:
-    def __init__(self):
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+    def __init__(self, driver):
+        self.driver = driver
         self.products = []
 
     def scroll_down(self):
@@ -45,5 +42,3 @@ class Scraper:
     def serialize_to_json(self, path):
         with open('../jsons/' + path, 'w+') as write:
             json.dump(self.products, write, default=vars)
-
-

@@ -13,6 +13,5 @@ public interface ProductBaseService {
     ProductBase find(String model, String brand);
     List<ProductBase> findFiltered(ProductType clothes, int pageNum, int elementsPerPage, String[] filterParams);
     List<BrandMap> getFilterMap(ProductType type);
-
     List<ProductBase> search(String criteria, int pageNum, int elementsPerPage);
 }
