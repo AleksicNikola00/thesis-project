@@ -6,6 +6,8 @@ import com.ftn.thesisProject.model.Product;
 import com.ftn.thesisProject.model.ProductBase;
 import com.ftn.thesisProject.service.ProductBaseService;
 import com.ftn.thesisProject.service.ProductSpecificService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class UpdateDatabaseService {
 
     private ProductBaseService productBaseService;
     private ProductSpecificService productSpecificService;
+    private Logger logger = LoggerFactory.getLogger(UpdateDatabaseService.class);
 
     @Autowired
     public UpdateDatabaseService(ProductBaseService productBaseService, ProductSpecificService productSpecificService) {
@@ -45,11 +48,11 @@ public class UpdateDatabaseService {
                 for(Product product : products)
                     saveProduct(product);
 
-                System.out.println("Products successfully saved!");
+                logger.info("Products successfully saved!");
             }
         }
         catch (IOException e){
-            System.out.println("Error while saving: " + e.getMessage());
+            logger.error("Error while saving: " + e.getMessage());
         }
     }
 
