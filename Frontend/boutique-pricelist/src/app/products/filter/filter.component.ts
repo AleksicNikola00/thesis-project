@@ -37,4 +37,5 @@ export class FilterComponent implements OnInit {
     this.filterParamsEvent.emit(this.filterParams);
   }
 
+ 
 }

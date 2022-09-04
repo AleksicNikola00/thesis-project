@@ -38,9 +38,12 @@ class SportVisionScraper(Scraper):
             self.driver.find_element_by_css_selector("[class='icon-caret-right']").click()
 
     def close_cookies(self):
-        cookie_button = WebDriverWait(self.driver, 20).until(
-            expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, "[class='cookie-agree-gdpr']")))
-        cookie_button.click()
+        try:
+            cookie_button = WebDriverWait(self.driver, 20).until(
+                expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, "[class='cookie-agree-gdpr']")))
+            cookie_button.click()
+        except:
+            print("No cookie button")
         time.sleep(2)
 
     def collect_page_data(self, product_type):

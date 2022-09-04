@@ -24,8 +24,6 @@ export class ProductListComponent implements OnInit {
       if(this.products.length > 0)
         this.newPageEvent.emit('SKROLDOWN');
     }
-      
-
   }
 
 }
