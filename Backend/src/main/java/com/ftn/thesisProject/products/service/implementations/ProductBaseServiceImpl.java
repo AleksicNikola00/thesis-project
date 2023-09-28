@@ -1,17 +1,16 @@
-package com.ftn.thesisProject.service;
+package com.ftn.thesisProject.products.service.implementations;
 
 
-import com.ftn.thesisProject.model.BrandMap;
-import com.ftn.thesisProject.model.ProductBase;
-import com.ftn.thesisProject.model.enumerations.ProductType;
-import com.ftn.thesisProject.repository.ProductBaseRepository;
+import com.ftn.thesisProject.products.persistance.model.BrandMap;
+import com.ftn.thesisProject.products.persistance.model.ProductBase;
+import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
+import com.ftn.thesisProject.products.persistance.repository.ProductBaseRepository;
+import com.ftn.thesisProject.products.service.ProductBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 

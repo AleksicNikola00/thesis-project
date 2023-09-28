@@ -1,17 +1,16 @@
-package com.ftn.thesisProject.controller;
+package com.ftn.thesisProject.products.api.v1;
 
-import com.ftn.thesisProject.dtos.ProductBaseDTO;
-import com.ftn.thesisProject.model.BrandMap;
-import com.ftn.thesisProject.model.ProductBase;
-import com.ftn.thesisProject.model.constants.Constants;
-import com.ftn.thesisProject.model.enumerations.ProductType;
-import com.ftn.thesisProject.service.ProductBaseService;
+import com.ftn.thesisProject.products.api.dto.ProductBaseDTO;
+import com.ftn.thesisProject.products.persistance.model.BrandMap;
+import com.ftn.thesisProject.products.persistance.model.ProductBase;
+import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
+import com.ftn.thesisProject.products.service.ProductBaseService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RequestMapping("/products")
@@ -19,12 +18,20 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    private ProductBaseService productBaseService;
+    private final ProductBaseService productBaseService;
+
+    @Value("${custom.pagination-size}")
+    private int ELEMENTS_PER_PAGE;
 
     public ProductController(ProductBaseService productBaseService) {
         this.productBaseService = productBaseService;
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> healthCheck(){
+        String retval = "Application is working and is returning " + ELEMENTS_PER_PAGE + " elements per page";
+        return ResponseEntity.ok(retval);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductBase> getProduct(@PathVariable Long id){
@@ -33,7 +40,7 @@ public class ProductController {
 
     @GetMapping("/search/{pageNum}")
     public ResponseEntity<List<ProductBaseDTO>> search(@PathVariable int pageNum,@RequestParam String criteria){
-        var products = productBaseService.search(criteria,pageNum,Constants.ELEMENTS_PER_PAGE);
+        var products = productBaseService.search(criteria,pageNum,ELEMENTS_PER_PAGE);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
@@ -53,7 +60,7 @@ public class ProductController {
 
     @GetMapping("/clothes/{pageNum}")
     public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
-        var products = productBaseService.findFiltered(ProductType.CLOTHES,pageNum, Constants.ELEMENTS_PER_PAGE,filterParams);
+        var products = productBaseService.findFiltered(ProductType.CLOTHES,pageNum, ELEMENTS_PER_PAGE, filterParams);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));
@@ -63,7 +70,7 @@ public class ProductController {
 
     @GetMapping("/shoes/{pageNum}")
     public ResponseEntity<List<ProductBaseDTO>> getShoesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
-        var products = productBaseService.findFiltered(ProductType.SHOES,pageNum, Constants.ELEMENTS_PER_PAGE,filterParams);
+        var products = productBaseService.findFiltered(ProductType.SHOES,pageNum, ELEMENTS_PER_PAGE,filterParams);
         var retProducts = new ArrayList<ProductBaseDTO>();
         for(ProductBase productBase : products)
             retProducts.add(new ProductBaseDTO(productBase.getBrand(),productBase.getModel(),productBase.getProductType(),productBase.getImgSrc(), productBase.getId()));

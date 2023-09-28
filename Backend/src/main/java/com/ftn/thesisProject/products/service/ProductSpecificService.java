@@ -1,6 +1,6 @@
-package com.ftn.thesisProject.service;
+package com.ftn.thesisProject.products.service;
 
-import com.ftn.thesisProject.model.ProductSpecific;
+import com.ftn.thesisProject.products.persistance.model.ProductSpecific;
 
 import java.util.List;
 

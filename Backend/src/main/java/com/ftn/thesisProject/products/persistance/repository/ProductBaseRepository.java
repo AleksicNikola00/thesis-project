@@ -1,13 +1,12 @@
-package com.ftn.thesisProject.repository;
+package com.ftn.thesisProject.products.persistance.repository;
 
-import com.ftn.thesisProject.model.BrandMap;
-import com.ftn.thesisProject.model.ProductBase;
-import com.ftn.thesisProject.model.enumerations.ProductType;
+import com.ftn.thesisProject.products.persistance.model.BrandMap;
+import com.ftn.thesisProject.products.persistance.model.ProductBase;
+import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface ProductBaseRepository extends JpaRepository<ProductBase, Long> {

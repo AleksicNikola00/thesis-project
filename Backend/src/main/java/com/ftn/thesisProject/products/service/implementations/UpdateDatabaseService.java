@@ -1,9 +1,11 @@
-package com.ftn.thesisProject.service;
+package com.ftn.thesisProject.products.service.implementations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ftn.thesisProject.model.Product;
-import com.ftn.thesisProject.model.ProductBase;
+import com.ftn.thesisProject.products.persistance.model.Product;
+import com.ftn.thesisProject.products.persistance.model.ProductBase;
+import com.ftn.thesisProject.products.service.ProductBaseService;
+import com.ftn.thesisProject.products.service.ProductSpecificService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

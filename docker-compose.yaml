@@ -22,10 +22,18 @@ services:
     ports:
       - "5050:80"
 
-  product-app:
-    container_name: product_app
-    build:
-      context: Backend
-      dockerfile: Dockerfile
-    ports:
-      - 8080:8080
+  # product-app:
+  #   container_name: product_app
+  #   build:
+  #     context: Backend
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     DB_URL: ${DB_URL_INTERNAL}
+  #     DB_USERNAME: ${DB_USERNAME}
+  #     DB_PASSWORD: ${DB_PASSWORD}
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     db:
+  #       condition: service_started
+  #       restart: true

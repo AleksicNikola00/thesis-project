@@ -1,6 +1,6 @@
-package com.ftn.thesisProject.dtos;
+package com.ftn.thesisProject.products.api.dto;
 
-import com.ftn.thesisProject.model.enumerations.ProductType;
+import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 
 public class ProductBaseDTO {
 

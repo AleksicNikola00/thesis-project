@@ -1,9 +1,7 @@
-package com.ftn.thesisProject.repository;
+package com.ftn.thesisProject.products.persistance.repository;
 
-import com.ftn.thesisProject.model.ProductSpecific;
+import com.ftn.thesisProject.products.persistance.model.ProductSpecific;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface ProductSpecificRepository extends JpaRepository<ProductSpecific, Long> {
 }

@@ -1,8 +1,8 @@
-package com.ftn.thesisProject.service;
+package com.ftn.thesisProject.products.service;
 
-import com.ftn.thesisProject.model.BrandMap;
-import com.ftn.thesisProject.model.ProductBase;
-import com.ftn.thesisProject.model.enumerations.ProductType;
+import com.ftn.thesisProject.products.persistance.model.BrandMap;
+import com.ftn.thesisProject.products.persistance.model.ProductBase;
+import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 
 import java.util.List;
 

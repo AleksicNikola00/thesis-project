@@ -1,8 +1,8 @@
-package com.ftn.thesisProject.model;
+package com.ftn.thesisProject.products.persistance.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ftn.thesisProject.model.enumerations.ProductType;
+import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 
 import javax.persistence.*;
 import java.util.List;
