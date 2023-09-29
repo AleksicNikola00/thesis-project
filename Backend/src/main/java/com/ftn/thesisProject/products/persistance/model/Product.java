@@ -1,24 +1,14 @@
 package com.ftn.thesisProject.products.persistance.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
    private ProductBase productBase;
    private ProductSpecific productSpecific;
-
-    public ProductBase getProductBase() {
-        return productBase;
-    }
-
-    public void setProductBase(ProductBase productBase) {
-        this.productBase = productBase;
-    }
-
-    public ProductSpecific getProductSpecific() {
-        return productSpecific;
-    }
-
-    public void setProductSpecific(ProductSpecific productSpecific) {
-        this.productSpecific = productSpecific;
-    }
 }

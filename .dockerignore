@@ -1,0 +1,8 @@
+target
+.idea
+logs
+.gitignore
+docker-compose*
+README.md
+node_modules
+*.txt

@@ -6,24 +6,21 @@ import com.ftn.thesisProject.products.persistance.model.Product;
 import com.ftn.thesisProject.products.persistance.model.ProductBase;
 import com.ftn.thesisProject.products.service.ProductBaseService;
 import com.ftn.thesisProject.products.service.ProductSpecificService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.List;
+import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class UpdateDatabaseService {
 
-    private ProductBaseService productBaseService;
-    private ProductSpecificService productSpecificService;
+    private final ProductBaseService productBaseService;
+    private final ProductSpecificService productSpecificService;
 
-    @Autowired
-    public UpdateDatabaseService(ProductBaseService productBaseService, ProductSpecificService productSpecificService) {
-        this.productBaseService = productBaseService;
-        this.productSpecificService = productSpecificService;
-    }
 
     // cron = second, minute, hour, day of month, month, day(s) of week
     // once a day
@@ -33,14 +30,16 @@ public class UpdateDatabaseService {
         ObjectMapper mapper = new ObjectMapper();
         TypeReference<List<Product>> typeReference = new TypeReference<>() {
         };
-        InputStream inputStream = TypeReference.class.getResourceAsStream("/jsons/json-list.txt");
+        String JSONS_PATH = "/jsons";
+        String JSONS_LIST_NAME = "json-list.txt";
+        InputStream inputStream = TypeReference.class.getResourceAsStream(JSONS_PATH + "/" + JSONS_LIST_NAME);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
 
         try {
             while(reader.ready()) {
                 String path = reader.readLine();
-                InputStream inpStream = TypeReference.class.getResourceAsStream("/jsons/" + path);
+                InputStream inpStream = TypeReference.class.getResourceAsStream(JSONS_PATH + "/" + path);
                 List<Product> products = mapper.readValue(inpStream,typeReference);
                 for(Product product : products)
                     saveProduct(product);
