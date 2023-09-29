@@ -1,6 +1,6 @@
-FROM openjdk:11.0.11-jdk-slim
+FROM eclipse-temurin:11.0.20.1_1-jre-alpine
 
-EXPOSE 8080
+EXPOSE 8081
 
 ADD target/spring-boot-docker.jar spring-boot-docker.jar
 
