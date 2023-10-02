@@ -22,8 +22,8 @@ services:
     ports:
       - "5050:80"
 
-  product-app:
-    container_name: product_app
+  product-backend:
+    container_name: product-backend
     build:
       context: Backend
       dockerfile: multistage.Dockerfile
@@ -39,3 +39,15 @@ services:
       db:
         condition: service_started
         restart: true
+
+  product-frontend:
+    container_name: product-frontend
+    build:
+      context: Frontend/boutique-pricelist
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80
+    depends_on:
+      product-backend:
+        condition: service_started
+        restart: false
