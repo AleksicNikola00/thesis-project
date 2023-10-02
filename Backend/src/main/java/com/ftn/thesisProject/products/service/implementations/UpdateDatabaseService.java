@@ -7,6 +7,7 @@ import com.ftn.thesisProject.products.persistance.model.ProductBase;
 import com.ftn.thesisProject.products.service.ProductBaseService;
 import com.ftn.thesisProject.products.service.ProductSpecificService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UpdateDatabaseService {
 
     private final ProductBaseService productBaseService;
@@ -30,25 +32,27 @@ public class UpdateDatabaseService {
         ObjectMapper mapper = new ObjectMapper();
         TypeReference<List<Product>> typeReference = new TypeReference<>() {
         };
-        String JSONS_PATH = "/jsons";
-        String JSONS_LIST_NAME = "json-list.txt";
-        InputStream inputStream = TypeReference.class.getResourceAsStream(JSONS_PATH + "/" + JSONS_LIST_NAME);
+        String JSON_PATH = "/jsons";
+        String JSON_NAME = "json-list.txt";
+        InputStream inputStream = TypeReference.class.getResourceAsStream(JSON_PATH + "/" + JSON_NAME);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
 
         try {
+            log.info("Started saving products!");
             while(reader.ready()) {
                 String path = reader.readLine();
-                InputStream inpStream = TypeReference.class.getResourceAsStream(JSONS_PATH + "/" + path);
+                InputStream inpStream = TypeReference.class.getResourceAsStream(JSON_PATH + "/" + path);
                 List<Product> products = mapper.readValue(inpStream,typeReference);
                 for(Product product : products)
                     saveProduct(product);
 
-                System.out.println("Products successfully saved!");
+                log.info("Products from path " + path + " successfully saved!");
             }
+            log.info("Products successfully saved!");
         }
         catch (IOException e){
-            System.out.println("Error while saving: " + e.getMessage());
+            log.error("Error while saving: " + e.getMessage());
         }
     }
 
