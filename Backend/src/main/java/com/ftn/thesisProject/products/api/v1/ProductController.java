@@ -7,6 +7,8 @@ import com.ftn.thesisProject.products.api.mapper.ProductMapper;
 import com.ftn.thesisProject.products.persistance.model.BrandMap;
 import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 import com.ftn.thesisProject.products.service.ProductBaseService;
+import com.ftn.thesisProject.products.service.implementations.UpdateDatabaseService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @RequestMapping("/products")
 @CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 @RestController
 public class ProductController {
 
@@ -24,9 +27,6 @@ public class ProductController {
     @Value("${custom.pagination-size}")
     private int ELEMENTS_PER_PAGE;
 
-    public ProductController(ProductBaseService productBaseService) {
-        this.productBaseService = productBaseService;
-    }
 
     @GetMapping("/test")
     public ResponseEntity<String> healthCheck(){
@@ -71,5 +71,8 @@ public class ProductController {
         var retProducts =ProductMapper.INSTANCE.toProductBaseDTOs(products);
         return new ResponseEntity<>(retProducts, HttpStatus.OK);
     }
+
+
+
 
 }
