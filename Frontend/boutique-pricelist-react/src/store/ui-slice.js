@@ -12,7 +12,7 @@ const uiSlice = createSlice({
   initialState: initalUIState,
   reducers: {
     /**
-     * @param {{type: string, payload: 'light' | 'dark'}} action description
+     * @param {{type: string, payload: 'light' | 'dark'}} action sets display mode to the one from payload
      */
     setDisplayMode(state, action) {
       const newDisplayMode = action.payload;

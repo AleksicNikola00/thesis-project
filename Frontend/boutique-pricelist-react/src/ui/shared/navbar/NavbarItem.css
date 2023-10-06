@@ -1,0 +1,8 @@
+.navbar-item .tooltip {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar-item:hover .tooltip {
+  opacity: 1;
+}
