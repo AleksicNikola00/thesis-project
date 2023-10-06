@@ -1,16 +1,17 @@
 import clsx from "clsx";
 import "./NavbarItem.css";
 
-const NavbarItem = ({ children, className, tooltip, active }) => {
+const NavbarItem = ({ id, children, className, tooltip, active }) => {
   return (
-    <button
+    <li
+      id={id}
       className={clsx("flex justify-center relative navbar-item", {
-        [`${className}`]: !!className,
+        [className]: !!className,
       })}
     >
       <div
         className={clsx(
-          "flex  transition-opacity  items-center gap-2  hover:opacity-80 active:opacity-60",
+          "flex  transition-opacity cursor-pointer  items-center gap-2  hover:opacity-80 active:opacity-60",
           {
             ["opacity-60"]: active,
           }
@@ -24,7 +25,7 @@ const NavbarItem = ({ children, className, tooltip, active }) => {
           {tooltip}
         </span>
       )}
-    </button>
+    </li>
   );
 };
 
