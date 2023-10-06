@@ -1,6 +1,14 @@
 import clsx from "clsx";
 import "./NavbarItem.css";
 
+/**
+ * @param {object} props
+ * @param {string} props.id
+ * @param {React.ReactNode} props.children
+ * @param {string} props.className
+ * @param {string} props.tooltip Optional tooltip
+ * @param {boolean} props.active Wheter route for given item is active
+ */
 const NavbarItem = ({ id, children, className, tooltip, active }) => {
   return (
     <li
