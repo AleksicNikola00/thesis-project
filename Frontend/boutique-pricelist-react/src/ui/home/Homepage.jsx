@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
+import { useNavigate } from "react-router-dom";
 
-const Homepage = () => {
+const HomePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onLightModeHandler = () => {
     dispatch(uiActions.setDisplayMode("light"));
@@ -27,9 +29,15 @@ const Homepage = () => {
         >
           Set light mode
         </button>
+        <button
+          onClick={() => navigate("/products")}
+          className="bg-yellow-500 p-3 rounded-lg"
+        >
+          Product page
+        </button>
       </div>
     </div>
   );
 };
 
-export default Homepage;
+export default HomePage;
