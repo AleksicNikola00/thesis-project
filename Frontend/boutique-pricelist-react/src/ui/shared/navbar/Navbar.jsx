@@ -6,6 +6,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../../store/ui-slice";
+import SearchBar from "../components/inputs/SearchBar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -35,19 +36,22 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="fixed bg-zinc-200 dark:bg-neutral-900 top-0 left-0 right-0 h-14 px-10">
+    <nav className="fixed bg-zinc-300 dark:bg-neutral-900 top-0 left-0 right-0 h-14 px-10">
       <ul className="flex justify-between items-center h-full">
         <NavbarItem id="homepage" tooltip="Homepage">
           <span className="text-lg">Boutique pricelist</span>
           <CheckroomIcon />
         </NavbarItem>
 
-        <NavbarItem id="display-mode" tooltip="Change mode">
-          <OppositeVariantButton
-            firstVariant={lightModeVariant}
-            secondVariant={darkModeVariant}
-          />
-        </NavbarItem>
+        <div className="flex justify-content gap-5  items-center">
+          <SearchBar />
+          <NavbarItem id="display-mode" tooltip="Change mode">
+            <OppositeVariantButton
+              firstVariant={lightModeVariant}
+              secondVariant={darkModeVariant}
+            />
+          </NavbarItem>
+        </div>
       </ul>
     </nav>
   );
