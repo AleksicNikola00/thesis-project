@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/products")
@@ -56,6 +57,18 @@ public class ProductController {
     @GetMapping("/shoes/brands")
     public ResponseEntity<List<BrandMap>> getShoesFilterMap(){
         return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.SHOES),HttpStatus.OK);
+    }
+
+    @GetMapping("/brands")
+    public ResponseEntity<List<BrandMap>> getBrandMap(@RequestParam String productType){
+        List<BrandMap> brandMap = new ArrayList<>();
+
+        if(productType.equalsIgnoreCase(ProductType.CLOTHES.name()))
+            brandMap = productBaseService.getFilterMap(ProductType.CLOTHES);
+        if(productType.equalsIgnoreCase(ProductType.SHOES.name()))
+            brandMap = productBaseService.getFilterMap(ProductType.SHOES);
+
+        return ResponseEntity.ok(brandMap);
     }
 
     @GetMapping("/clothes/{pageNum}")

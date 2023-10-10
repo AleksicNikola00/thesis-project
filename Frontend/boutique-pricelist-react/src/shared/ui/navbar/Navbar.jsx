@@ -5,7 +5,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { uiActions } from "../../../store/ui-slice";
+import { uiActions } from "../../store/ui-slice";
 import SearchBar from "../components/inputs/SearchBar";
 
 const Navbar = () => {
