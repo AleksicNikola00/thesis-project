@@ -5,21 +5,25 @@
  */
 const Filter = ({ title, items }) => {
   return (
-    <div className="flex text-sm justify-center">
-      <ul className="flex flex-col">
-        <span className="font-bold text-base text-center">{title}</span>
-        {items.map(({ brand, count }) => (
-          <li
-            key={brand}
-            className="flex mt-5 gap-5 items-center justify-between"
-          >
-            <span>
-              {brand} ({count})
-            </span>
-            <input type="checkbox" />
-          </li>
-        ))}
-      </ul>
+    <div className="flex  h-full flex-col items-center">
+      <span className="font-bold text-base text-center">{title}</span>
+      <div
+        className="flex  overflow-y-auto  text-sm justify-center
+    hover:scrollbar scrollbar-none scrollbar-w-3 
+    scrollbar-track-rounded-lg scrollbar-track-gray-500
+    scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900 "
+      >
+        <ul>
+          {items.map(({ brand, count }) => (
+            <li key={brand} className="flex mt-5 items-center justify-between">
+              <input type="checkbox" />
+              <span>
+                {brand} ({count})
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
