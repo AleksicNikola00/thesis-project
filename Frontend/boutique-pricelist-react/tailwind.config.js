@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 
-export default {
+// eslint-disable-next-line no-undef
+module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -9,8 +11,7 @@ export default {
       },
     },
   },
-  plugins: [
-    //require('tailwind-scrollbar'),
-  ],
+  // eslint-disable-next-line no-undef
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
   darkMode: "class",
 };

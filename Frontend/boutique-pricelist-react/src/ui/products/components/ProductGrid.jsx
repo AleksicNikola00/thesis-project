@@ -4,9 +4,16 @@ const gridItems = [
 
 const ProductGrid = () => {
   return (
-    <div className="grid grid-cols-3 h-full gap-x-5 gap-y-20 overflow-y-auto p-5">
+    <div
+      className="
+    grid grid-cols-4 h-full
+    gap-20 overflow-y-auto p-5
+    scrollbar scrollbar-w-3
+    scrollbar-track-rounded-lg scrollbar-track-gray-500
+    scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900 "
+    >
       {gridItems.map((item) => (
-        <div key={item} className="border-2 border-black h-40">
+        <div key={item} className="border-2 border-black h-52">
           {item}
         </div>
       ))}
