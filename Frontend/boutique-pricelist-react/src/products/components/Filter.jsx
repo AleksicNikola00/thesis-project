@@ -8,8 +8,8 @@ const Filter = ({ title, items }) => {
     <div className="flex  h-full flex-col items-center">
       <span className="font-bold text-base text-center">{title}</span>
       <div
-        className="flex  overflow-y-auto  text-sm justify-center
-    hover:scrollbar scrollbar-none scrollbar-w-3 
+        className="flex  overflow-y-auto px-1 text-sm justify-center
+    scrollbar  scrollbar-w-1 
     scrollbar-track-rounded-lg scrollbar-track-gray-500
     scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900 "
       >
