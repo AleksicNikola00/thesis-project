@@ -24,23 +24,23 @@ services:
     ports:
       - "5050:80"
 
-  # product-backend:
-  #   container_name: product-backend
-  #   build:
-  #     context: Backend
-  #     dockerfile: multistage.Dockerfile
-  #   environment:
-  #     DB_URL: ${DB_URL_INTERNAL}
-  #     DB_USERNAME: ${DB_USERNAME}
-  #     DB_PASSWORD: ${DB_PASSWORD}
-  #     PRODUCT_APP_PORT: ${PRODUCT_APP_PORT}
-  #     PAGINATION_SIZE: ${PAGINATION_SIZE}
-  #   ports:
-  #     - ${PRODUCT_APP_PORT}:${PRODUCT_APP_PORT}
-  #   depends_on:
-  #     db:
-  #       condition: service_started
-  #       restart: true
+  product-backend:
+    container_name: product-backend
+    build:
+      context: Backend
+      dockerfile: multistage.Dockerfile
+    environment:
+      DB_URL: ${DB_URL_INTERNAL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      PRODUCT_APP_PORT: ${PRODUCT_APP_PORT}
+      PAGINATION_SIZE: ${PAGINATION_SIZE}
+    ports:
+      - ${PRODUCT_APP_PORT}:${PRODUCT_APP_PORT}
+    depends_on:
+      db:
+        condition: service_started
+        restart: true
 
   # product-frontend:
   #   container_name: product-frontend

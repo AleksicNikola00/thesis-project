@@ -13,13 +13,13 @@ const NavbarItem = ({ id, children, className, tooltip, active }) => {
   return (
     <li
       id={id}
-      className={clsx("flex justify-center relative navbar-item", {
+      className={clsx("flex justify-center   relative navbar-item", {
         [className]: !!className,
       })}
     >
       <div
         className={clsx(
-          "flex  transition-opacity cursor-pointer  items-center gap-2  hover:opacity-80 active:opacity-60",
+          "flex  transition-opacity  cursor-pointer  items-center gap-2  hover:opacity-80 active:opacity-60",
           {
             ["opacity-60"]: active,
           }
@@ -29,7 +29,7 @@ const NavbarItem = ({ id, children, className, tooltip, active }) => {
       </div>
 
       {tooltip && (
-        <span className="tooltip text-sm whitespace-nowrap dark:bg-stone-600 bg-zinc-400 p-1 rounded  absolute opacity-100  -bottom-8">
+        <span className="tooltip text-xs  whitespace-nowrap dark:bg-stone-600 bg-zinc-400 p-1 rounded  absolute opacity-100  -bottom-8">
           {tooltip}
         </span>
       )}
