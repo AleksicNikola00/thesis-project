@@ -2,12 +2,13 @@ import clsx from "clsx";
 import "./NavbarItem.css";
 
 /**
- * @param {object} props
- * @param {string} props.id
- * @param {React.ReactNode} props.children
- * @param {string} props.className
- * @param {string} props.tooltip Optional tooltip
- * @param {boolean} props.active Wheter route for given item is active
+ * Represents a navigation bar item.
+ * @param {Object} props - The properties for the NavbarItem.
+ * @param {string} props.id - The unique identifier for the item.
+ * @param {React.ReactNode} props.children - The content to be rendered within the item.
+ * @param {string} props.className - The CSS class name for styling the item.
+ * @param {string} props.tooltip - An optional tooltip to display.
+ * @param {boolean} props.active - Indicates whether the route for the item is active.
  */
 const NavbarItem = ({ id, children, className, tooltip, active }) => {
   return (

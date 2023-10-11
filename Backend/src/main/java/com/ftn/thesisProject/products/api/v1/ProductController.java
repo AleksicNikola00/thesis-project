@@ -7,7 +7,6 @@ import com.ftn.thesisProject.products.api.mapper.ProductMapper;
 import com.ftn.thesisProject.products.persistance.model.BrandMap;
 import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 import com.ftn.thesisProject.products.service.ProductBaseService;
-import com.ftn.thesisProject.products.service.implementations.UpdateDatabaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

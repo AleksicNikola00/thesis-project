@@ -38,7 +38,7 @@ const SearchBar = () => {
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
         className={clsx(
-          "min-w-[20rem] text-black bg-zinc-100 dark:bg-white outline-none px-9  py-2   rounded-t-lg",
+          "min-w-[20rem] text-black bg-zinc-100 dark:bg-white outline-none px-9  py-2 shadow-md  rounded-t-lg",
           {
             ["rounded-b-lg"]: !isActive,
           }

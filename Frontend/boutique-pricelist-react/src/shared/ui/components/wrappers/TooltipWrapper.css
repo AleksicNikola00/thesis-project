@@ -1,0 +1,9 @@
+.label-container .tooltip {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms;
+}
+
+.label-container:hover .tooltip {
+  opacity: 1;
+}

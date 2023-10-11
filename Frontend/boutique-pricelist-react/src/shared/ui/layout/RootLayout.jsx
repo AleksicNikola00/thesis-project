@@ -13,7 +13,9 @@ const RootLayout = () => {
       })}
     >
       <div className="dark:text-white">
-        <Navbar />
+        <header>
+          <Navbar />
+        </header>
         <main className="pt-14 h-screen">
           <Outlet />
         </main>

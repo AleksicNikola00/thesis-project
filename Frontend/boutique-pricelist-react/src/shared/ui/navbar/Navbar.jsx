@@ -1,39 +1,13 @@
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import NavbarItem from "./NavbarItem";
 import OppositeVariantButton from "../components/controls/OppositeVariantButton";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { useCallback, useMemo } from "react";
-import { useDispatch } from "react-redux";
-import { uiActions } from "../../store/ui-slice";
+
 import SearchBar from "../components/inputs/SearchBar";
+import useButtonVariant from "./useButtonVariant";
+import TooltipLabel from "../components/labels/TooltipLabel";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-
-  const onLightModeHandler = useCallback(() => {
-    dispatch(uiActions.setDisplayMode("light"));
-  }, [dispatch]);
-
-  const onDarkModeHandler = useCallback(() => {
-    dispatch(uiActions.setDisplayMode("dark"));
-  }, [dispatch]);
-
-  const lightModeVariant = useMemo(
-    () => ({
-      icon: <LightModeIcon />,
-      action: onLightModeHandler,
-    }),
-    [onLightModeHandler]
-  );
-
-  const darkModeVariant = useMemo(
-    () => ({
-      icon: <DarkModeIcon />,
-      action: onDarkModeHandler,
-    }),
-    [onDarkModeHandler]
-  );
+  const { lightModeVariant, darkModeVariant } = useButtonVariant();
 
   return (
     <nav className="fixed z-10 bg-zinc-300 dark:bg-neutral-900 top-0 left-0 right-0 h-14 px-8">
@@ -42,6 +16,14 @@ const Navbar = () => {
           <span className="text-lg">Boutique pricelist</span>
           <CheckroomIcon />
         </NavbarItem>
+
+        <TooltipLabel label="Pera" tooltip="Perica" />
+        <TooltipLabel
+          label="Perasadasdadad"
+          labelLimit={5}
+          tooltip="Perasadasdadad"
+          tooltipPosition="center"
+        />
 
         <div className="flex justify-content gap-5  items-center">
           <SearchBar />
