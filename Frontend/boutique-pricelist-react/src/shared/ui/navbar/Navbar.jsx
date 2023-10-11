@@ -4,7 +4,6 @@ import OppositeVariantButton from "../components/controls/OppositeVariantButton"
 
 import SearchBar from "../components/inputs/SearchBar";
 import useButtonVariant from "./useButtonVariant";
-import TooltipLabel from "../components/labels/TooltipLabel";
 
 const Navbar = () => {
   const { lightModeVariant, darkModeVariant } = useButtonVariant();
@@ -16,14 +15,6 @@ const Navbar = () => {
           <span className="text-lg">Boutique pricelist</span>
           <CheckroomIcon />
         </NavbarItem>
-
-        <TooltipLabel label="Pera" tooltip="Perica" />
-        <TooltipLabel
-          label="Perasadasdadad"
-          labelLimit={5}
-          tooltip="Perasadasdadad"
-          tooltipPosition="center"
-        />
 
         <div className="flex justify-content gap-5  items-center">
           <SearchBar />

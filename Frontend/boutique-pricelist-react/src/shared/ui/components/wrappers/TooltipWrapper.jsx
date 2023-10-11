@@ -17,11 +17,11 @@ const TooltipWrapper = ({
   tooltipPosition = "below",
 }) => {
   const shortenedLabel = labelLimit
-    ? label.substring(0, labelLimit) + "..."
+    ? label.substring(0, labelLimit - 1) + "..."
     : label;
 
   return (
-    <div className="label-container flex relative justify-center">
+    <div className="label-container flex relative items-center justify-center">
       {shortenedLabel && <span>{shortenedLabel}</span>}
       {children}
       <span
@@ -29,7 +29,7 @@ const TooltipWrapper = ({
           "tooltip absolute whitespace-nowrap dark:bg-stone-600 bg-zinc-400 p-1 rounded",
           {
             ["-bottom-8 text-xs"]: tooltipPosition === "below",
-            ["text-sm "]: tooltipPosition === "center",
+            ["text-sm  p-2"]: tooltipPosition === "center",
           }
         )}
       >
