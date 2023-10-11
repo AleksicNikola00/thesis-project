@@ -7,7 +7,7 @@ const ProductGrid = () => {
     <div
       className="
     grid grid-cols-4 h-full
-    gap-20 overflow-y-auto p-5
+    gap-20 overflow-y-auto py-5 px-10
    scrollbar  scrollbar-w-3
     scrollbar-track-rounded-lg scrollbar-track-gray-500
     scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900 "
