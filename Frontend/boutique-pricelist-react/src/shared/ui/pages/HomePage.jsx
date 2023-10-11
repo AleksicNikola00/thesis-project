@@ -1,41 +1,38 @@
-import { useDispatch } from "react-redux";
-import { uiActions } from "../../store/ui-slice";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onLightModeHandler = () => {
-    dispatch(uiActions.setDisplayMode("light"));
+  const onShoesHandler = () => {
+    navigate("/products?type=shoes");
   };
-  const onDarkModeHandler = () => {
-    dispatch(uiActions.setDisplayMode("dark"));
+
+  const onClothesHandler = () => {
+    navigate("/products?type=clothes");
   };
 
   return (
-    <div className="flex h-screen w-screen justify-center items-center dark:bg-neutral-950 dark:text-white">
-      <h1 className="text-7xl font-bold ">Welcome user!</h1>
-      <div className="flex flex-col gap-4 ms-5">
-        <button
-          onClick={onDarkModeHandler}
-          className="bg-slate-500 p-3 rounded-lg"
-        >
-          Set dark mode
-        </button>
-        <button
-          onClick={onLightModeHandler}
-          className="bg-yellow-500 p-3 rounded-lg"
-        >
-          Set light mode
-        </button>
-        <button
-          onClick={() => navigate("/products")}
-          className="bg-yellow-500 p-3 rounded-lg"
-        >
-          Product page
-        </button>
-      </div>
+    <div className="flex h-full px-10 justify-center items-center gap-10  dark:bg-neutral-950 dark:text-white">
+      <button
+        onClick={onClothesHandler}
+        className="w-1/2 h-5/6 bg-zinc-300 dark:bg-neutral-900"
+      >
+        <img
+          src="/pngs/clothes.png"
+          className="w-full h-full object-cover
+        transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110"
+        />
+      </button>
+      <button
+        onClick={onShoesHandler}
+        className="w-1/2 h-5/6 bg-zinc-300 dark:bg-neutral-900
+        transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110"
+      >
+        <img
+          src="/pngs/air-force-1.png"
+          className="w-full h-full object-cover"
+        />
+      </button>
     </div>
   );
 };

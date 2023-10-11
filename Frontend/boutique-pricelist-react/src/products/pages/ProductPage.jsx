@@ -2,11 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import Filter from "../components/Filter";
 import ProductGrid from "../components/ProductGrid";
 import { getBrands } from "../api/products-api";
+import { useSearchParams } from "react-router-dom";
+
+const searchParamsMap = {
+  productType: "type",
+};
 
 const ProductPage = () => {
+  const [searchParams] = useSearchParams();
+
+  const productType = searchParams.get(searchParamsMap.productType);
+
   const { data: brandMap, isPending } = useQuery({
-    queryKey: ["products", "clothes"],
-    queryFn: () => getBrands("clothes"),
+    queryKey: ["products", productType],
+    queryFn: () => getBrands(productType),
   });
 
   if (isPending) return <h1>Loading...</h1>;

@@ -9,11 +9,13 @@ import TooltipWrapper from "../components/wrappers/TooltipWrapper";
  * @param {string} props.className - The CSS class name for styling the item.
  * @param {boolean} props.active - Indicates whether the route for the item is active.
  * @param {string} props.tooltip - The tooltip shown when hovering item.
+ * @param {() => void} props.onClick - Handler for click on item.
  */
-const NavbarItem = ({ id, children, className, active, tooltip }) => {
+const NavbarItem = ({ id, children, className, active, tooltip, onClick }) => {
   return (
     <li
       id={id}
+      onClick={onClick}
       className={clsx("flex justify-center relative navbar-item", {
         [className]: !!className,
       })}
