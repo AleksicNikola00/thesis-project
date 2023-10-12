@@ -3,10 +3,7 @@ import Filter from "../components/Filter";
 import ProductGrid from "../components/ProductGrid";
 import { getBrands } from "../api/products-api";
 import { useSearchParams } from "react-router-dom";
-
-const searchParamsMap = {
-  productType: "type",
-};
+import { searchParamsMap } from "../helpers/search-params-map";
 
 const ProductPage = () => {
   const [searchParams] = useSearchParams();
