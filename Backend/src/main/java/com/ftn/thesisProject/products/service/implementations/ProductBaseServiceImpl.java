@@ -65,4 +65,10 @@ public class ProductBaseServiceImpl implements ProductBaseService {
         return productBaseRepository.searchByCriteria(criteria,PageRequest.of(pageNum,elementNum));
     }
 
+    @Override
+    public Long getCountByProductType(ProductType type) {
+        return productBaseRepository.countByProductType(type);
+    }
+
+
 }

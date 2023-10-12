@@ -25,7 +25,19 @@ public class ProductController {
 
     private final ProductBaseService productBaseService;
 
+    @GetMapping()
+    public ResponseEntity<List<ProductBaseDTO>> getProductsPageable(
+            @RequestParam int pageNum,
+            @RequestParam int pageSize,
+            @RequestParam String productType,
+            @RequestParam(required = false) String[] brands
+    ) {
+        var type = getProductType(productType);
+        var products = productBaseService.findFiltered(type,pageNum,pageSize, brands);
 
+        var retProducts = ProductMapper.INSTANCE.toProductBaseDTOs(products);
+        return ResponseEntity.ok(retProducts);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDetailsDTO> getProduct(@PathVariable Long id){
@@ -44,40 +56,25 @@ public class ProductController {
 
     @GetMapping("/brands")
     public ResponseEntity<List<BrandMap>> getBrandMap(@RequestParam String productType){
-        List<BrandMap> brandMap = new ArrayList<>();
-
-        if(productType.equalsIgnoreCase(ProductType.CLOTHES.name()))
-            brandMap = productBaseService.getFilterMap(ProductType.CLOTHES);
-        else if(productType.equalsIgnoreCase(ProductType.SHOES.name()))
-            brandMap = productBaseService.getFilterMap(ProductType.SHOES);
-
+        var type = getProductType(productType);
+        var brandMap = productBaseService.getFilterMap(type);
         return ResponseEntity.ok(brandMap);
     }
 
 
-    @GetMapping()
-    public ResponseEntity<List<ProductBaseDTO>> getProductsPageable(
-            @RequestParam int pageNum,
-            @RequestParam int pageSize,
-            @RequestParam String productType,
-            @RequestParam(required = false) String[] brands
-    ) {
-        List<ProductBaseDTO> retProducts = new ArrayList<>();
-        List<ProductBase> products = new ArrayList<>();
-
-        if (productType.equalsIgnoreCase(ProductType.CLOTHES.name())) {
-            products = productBaseService.findFiltered(ProductType.CLOTHES, pageNum, pageSize, brands);
-        } else if (productType.equalsIgnoreCase(ProductType.SHOES.name())) {
-            products = productBaseService.findFiltered(ProductType.SHOES, pageNum, pageSize, brands);
-        } else {
-            throw new InvalidProductTypeException("Provided product type doesn't exist!");
-        }
-
-        retProducts = ProductMapper.INSTANCE.toProductBaseDTOs(products);
-        return ResponseEntity.ok(retProducts);
+    @GetMapping("/count")
+    public ResponseEntity<Long> getCountByProductType(@RequestParam String productType){
+        var type = getProductType(productType);
+        Long count = productBaseService.getCountByProductType(type);
+        return ResponseEntity.ok(count);
     }
 
+    private ProductType getProductType(String productType){
+        if(productType.equalsIgnoreCase(ProductType.CLOTHES.name())) return ProductType.CLOTHES;
+        if(productType.equalsIgnoreCase(ProductType.SHOES.name())) return ProductType.SHOES;
 
+        throw new InvalidProductTypeException("Provided product type doesn't exist!");
+    }
 
 
 }
