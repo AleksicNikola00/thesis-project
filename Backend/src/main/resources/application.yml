@@ -21,5 +21,3 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     defer-datasource-initialization: true
-custom:
-  pagination-size: ${PAGINATION_SIZE}

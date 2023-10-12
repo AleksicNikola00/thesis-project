@@ -11,8 +11,7 @@ public interface ProductBaseService {
     void save(ProductBase productBase);
     void deleteAll();
     ProductBase find(String model, String brand);
-    List<ProductBase> findFiltered(ProductType clothes, int pageNum, int elementsPerPage, String[] filterParams);
+    List<ProductBase> findFiltered(ProductType clothes, int pageNum, int elementsPerPage, String[] brands);
     List<BrandMap> getFilterMap(ProductType type);
-
     List<ProductBase> search(String criteria, int pageNum, int elementsPerPage);
 }

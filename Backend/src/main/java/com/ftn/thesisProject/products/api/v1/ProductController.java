@@ -4,11 +4,12 @@ import com.ftn.thesisProject.products.api.dto.ProductBaseDTO;
 import com.ftn.thesisProject.products.api.dto.ProductDetailsDTO;
 import com.ftn.thesisProject.products.api.mapper.ProductDetailsMapper;
 import com.ftn.thesisProject.products.api.mapper.ProductMapper;
+import com.ftn.thesisProject.products.exceptions.custom.InvalidProductTypeException;
 import com.ftn.thesisProject.products.persistance.model.BrandMap;
+import com.ftn.thesisProject.products.persistance.model.ProductBase;
 import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 import com.ftn.thesisProject.products.service.ProductBaseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,15 +25,7 @@ public class ProductController {
 
     private final ProductBaseService productBaseService;
 
-    @Value("${custom.pagination-size}")
-    private int ELEMENTS_PER_PAGE;
 
-
-    @GetMapping("/test")
-    public ResponseEntity<String> healthCheck(){
-        String retVal = "Application is working and is returning " + ELEMENTS_PER_PAGE + " elements per page";
-        return ResponseEntity.ok(retVal);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDetailsDTO> getProduct(@PathVariable Long id){
@@ -41,22 +34,13 @@ public class ProductController {
         return ResponseEntity.ok(retVal);
     }
 
-    @GetMapping("/search/{pageNum}")
-    public ResponseEntity<List<ProductBaseDTO>> search(@PathVariable int pageNum,@RequestParam String criteria){
-        var products = productBaseService.search(criteria,pageNum,ELEMENTS_PER_PAGE);
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductBaseDTO>> search(@RequestParam int pageNum,@RequestParam int pageSize ,@RequestParam String criteria){
+        var products = productBaseService.search(criteria,pageNum, pageSize);
         var retProducts = ProductMapper.INSTANCE.toProductBaseDTOs(products);
         return new ResponseEntity<>(retProducts, HttpStatus.OK);
     }
 
-    @GetMapping("/clothes/brands")
-    public ResponseEntity<List<BrandMap>> getClothesFilterMap(){
-        return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.CLOTHES),HttpStatus.OK);
-    }
-
-    @GetMapping("/shoes/brands")
-    public ResponseEntity<List<BrandMap>> getShoesFilterMap(){
-        return new ResponseEntity<>(productBaseService.getFilterMap(ProductType.SHOES),HttpStatus.OK);
-    }
 
     @GetMapping("/brands")
     public ResponseEntity<List<BrandMap>> getBrandMap(@RequestParam String productType){
@@ -64,24 +48,33 @@ public class ProductController {
 
         if(productType.equalsIgnoreCase(ProductType.CLOTHES.name()))
             brandMap = productBaseService.getFilterMap(ProductType.CLOTHES);
-        if(productType.equalsIgnoreCase(ProductType.SHOES.name()))
+        else if(productType.equalsIgnoreCase(ProductType.SHOES.name()))
             brandMap = productBaseService.getFilterMap(ProductType.SHOES);
 
         return ResponseEntity.ok(brandMap);
     }
 
-    @GetMapping("/clothes/{pageNum}")
-    public ResponseEntity<List<ProductBaseDTO>> getClothesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
-        var products = productBaseService.findFiltered(ProductType.CLOTHES,pageNum, ELEMENTS_PER_PAGE, filterParams);
-        var retProducts = ProductMapper.INSTANCE.toProductBaseDTOs(products);
-        return new ResponseEntity<>(retProducts, HttpStatus.OK);
-    }
 
-    @GetMapping("/shoes/{pageNum}")
-    public ResponseEntity<List<ProductBaseDTO>> getShoesPageable(@PathVariable int pageNum,@RequestParam(required = false) String[] filterParams){
-        var products = productBaseService.findFiltered(ProductType.SHOES,pageNum, ELEMENTS_PER_PAGE,filterParams);
-        var retProducts =ProductMapper.INSTANCE.toProductBaseDTOs(products);
-        return new ResponseEntity<>(retProducts, HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<List<ProductBaseDTO>> getProductsPageable(
+            @RequestParam int pageNum,
+            @RequestParam int pageSize,
+            @RequestParam String productType,
+            @RequestParam(required = false) String[] brands
+    ) {
+        List<ProductBaseDTO> retProducts = new ArrayList<>();
+        List<ProductBase> products = new ArrayList<>();
+
+        if (productType.equalsIgnoreCase(ProductType.CLOTHES.name())) {
+            products = productBaseService.findFiltered(ProductType.CLOTHES, pageNum, pageSize, brands);
+        } else if (productType.equalsIgnoreCase(ProductType.SHOES.name())) {
+            products = productBaseService.findFiltered(ProductType.SHOES, pageNum, pageSize, brands);
+        } else {
+            throw new InvalidProductTypeException("Provided product type doesn't exist!");
+        }
+
+        retProducts = ProductMapper.INSTANCE.toProductBaseDTOs(products);
+        return ResponseEntity.ok(retProducts);
     }
 
 

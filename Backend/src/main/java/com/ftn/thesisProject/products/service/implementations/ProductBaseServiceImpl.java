@@ -1,6 +1,7 @@
 package com.ftn.thesisProject.products.service.implementations;
 
 
+import com.ftn.thesisProject.products.exceptions.custom.ProductNotFoundException;
 import com.ftn.thesisProject.products.persistance.model.BrandMap;
 import com.ftn.thesisProject.products.persistance.model.ProductBase;
 import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
@@ -27,7 +28,7 @@ public class ProductBaseServiceImpl implements ProductBaseService {
 
     @Override
     public ProductBase getById(Long id) {
-        return productBaseRepository.findById(id).get();
+        return productBaseRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(String.format("Product with id '%d' not found",id )));
     }
 
     @Override
@@ -47,9 +48,9 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     }
 
     @Override
-    public List<ProductBase> findFiltered(ProductType type, int pageNum, int elementNum, String[] filterParams) {
-        if(filterParams!=null && filterParams.length!= 0)
-            return productBaseRepository.findAllByProductTypeAndBrandIn(type, Arrays.asList(filterParams),PageRequest.of(pageNum,elementNum));
+    public List<ProductBase> findFiltered(ProductType type, int pageNum, int elementNum, String[] brands) {
+        if(brands!=null && brands.length!= 0)
+            return productBaseRepository.findAllByProductTypeAndBrandIn(type, Arrays.asList(brands),PageRequest.of(pageNum,elementNum));
         else
             return productBaseRepository.findAllByProductType(type,PageRequest.of(pageNum,elementNum));
     }
