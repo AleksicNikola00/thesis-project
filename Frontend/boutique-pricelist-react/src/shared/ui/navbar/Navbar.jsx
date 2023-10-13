@@ -7,7 +7,8 @@ import useButtonVariant from "./useButtonVariant";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const { lightModeVariant, darkModeVariant } = useButtonVariant();
+  const { lightModeVariant, darkModeVariant, initialVariant } =
+    useButtonVariant();
 
   const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ const Navbar = () => {
             <OppositeVariantButton
               firstVariant={lightModeVariant}
               secondVariant={darkModeVariant}
+              initialVariant={initialVariant}
             />
           </NavbarItem>
         </div>

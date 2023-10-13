@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -7,6 +7,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const useButtonVariant = () => {
   const dispatch = useDispatch();
+  const displayMode = useSelector((state) => state.ui.displayMode);
 
   const onLightModeHandler = useCallback(() => {
     dispatch(uiActions.setDisplayMode("light"));
@@ -24,6 +25,11 @@ const useButtonVariant = () => {
     [onLightModeHandler]
   );
 
+  const initialVariant = useMemo(
+    () => (displayMode === "dark" ? "first" : "second"),
+    [displayMode]
+  );
+
   const darkModeVariant = useMemo(
     () => ({
       icon: <DarkModeIcon />,
@@ -32,7 +38,7 @@ const useButtonVariant = () => {
     [onDarkModeHandler]
   );
 
-  return { lightModeVariant, darkModeVariant };
+  return { lightModeVariant, darkModeVariant, initialVariant };
 };
 
 export default useButtonVariant;
