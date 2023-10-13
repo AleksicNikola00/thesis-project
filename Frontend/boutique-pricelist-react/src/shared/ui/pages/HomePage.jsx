@@ -4,11 +4,11 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const onShoesHandler = () => {
-    navigate("/products?type=shoes&pageNum=0");
+    navigate("/products?type=shoes&pageNum=1");
   };
 
   const onClothesHandler = () => {
-    navigate("/products?type=clothes&pageNum=0");
+    navigate("/products?type=clothes&pageNum=1");
   };
 
   return (

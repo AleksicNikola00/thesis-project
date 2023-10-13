@@ -1,13 +1,36 @@
+import { useMemo } from "react";
 import TooltipWrapper from "../../shared/ui/components/wrappers/TooltipWrapper";
 
 const MAX_BRAND_LENGTH = 15;
+//Character that separates selected brands
+const BRANDS_SEPARATOR = ",";
 
 /**
  * @param {object} props
  * @param {string} props.title Title for filter section
+ * @param {string} props.selectedBrands Selected brands from url
  * @param {import("../api/products-api").BrandMap[]} props.items
+ * @param {(selectedBrands: string) => void} props.setSelectedBrands
  */
-const Filter = ({ title, items }) => {
+const ProductFilter = ({ title, items, selectedBrands, setSelectedBrands }) => {
+  const filteredItems = useMemo(
+    () =>
+      items.map((item) => ({
+        ...item,
+        selected: !!selectedBrands && selectedBrands.includes(item.brand),
+      })),
+    [items, selectedBrands]
+  );
+
+  const onChangeHandler = ({ target: { id, checked } }) => {
+    let newSelectedBrands = selectedBrands ?? "";
+    if (checked) newSelectedBrands += id + BRANDS_SEPARATOR;
+    else
+      newSelectedBrands = newSelectedBrands.replace(id + BRANDS_SEPARATOR, "");
+
+    setSelectedBrands(newSelectedBrands);
+  };
+
   return (
     <div className="flex h-full relative flex-col items-center">
       <span className="font-bold text-base text-center">{title}</span>
@@ -18,9 +41,14 @@ const Filter = ({ title, items }) => {
                     scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900"
       >
         <ul className="w-full">
-          {items.map(({ brand, count }) => (
+          {filteredItems.map(({ brand, count, selected }) => (
             <li key={brand} className="flex mt-5 items-center gap-5">
-              <input type="checkbox" />
+              <input
+                id={brand}
+                type="checkbox"
+                checked={selected}
+                onChange={onChangeHandler}
+              />
               <span className="flex items-center gap-2">
                 {/* brandLength + countLength is total span length */}
                 {brand.length + count.toString().length < MAX_BRAND_LENGTH ? (
@@ -43,4 +71,4 @@ const Filter = ({ title, items }) => {
   );
 };
 
-export default Filter;
+export default ProductFilter;

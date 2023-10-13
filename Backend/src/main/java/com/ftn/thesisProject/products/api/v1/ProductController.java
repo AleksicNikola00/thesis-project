@@ -55,7 +55,7 @@ public class ProductController {
 
 
     @GetMapping("/brands")
-    public ResponseEntity<List<BrandMap>> getBrandMap(@RequestParam String productType){
+    public ResponseEntity<List<BrandMap>> getBrandMap(@RequestParam String productType) throws InterruptedException {
         var type = getProductType(productType);
         var brandMap = productBaseService.getFilterMap(type);
         return ResponseEntity.ok(brandMap);

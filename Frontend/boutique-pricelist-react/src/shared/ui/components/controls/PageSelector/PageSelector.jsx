@@ -58,7 +58,7 @@ const PageSelector = ({
       <button
         disabled={currentPage === startingPageNum}
         onClick={onPreviousHandler}
-        className="hover:opacity-50"
+        className="enabled:hover:opacity-50 disabled:opacity-10"
       >
         <ChevronLeftIcon />
       </button>
@@ -99,7 +99,7 @@ const PageSelector = ({
         )}
       </div>
       <button
-        className="hover:opacity-50"
+        className="enabled:hover:opacity-50 disabled:opacity-10"
         onClick={onNextHandler}
         disabled={currentPage === totalPageNum}
       >
