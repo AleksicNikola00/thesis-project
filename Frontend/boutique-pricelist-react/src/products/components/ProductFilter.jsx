@@ -1,15 +1,15 @@
 import { useMemo } from "react";
 import TooltipWrapper from "../../shared/ui/components/wrappers/TooltipWrapper";
 
-const MAX_BRAND_LENGTH = 15;
 //Character that separates selected brands
 const BRANDS_SEPARATOR = ",";
+const MAX_BRAND_LENGTH = 15;
 
 /**
  * @param {object} props
  * @param {string} props.title Title for filter section
  * @param {string} props.selectedBrands Selected brands from url
- * @param {import("../api/products-api").BrandMap[]} props.items
+ * @param {import("../api/products-api").BrandMap[]} props.items Map with brands
  * @param {(selectedBrands: string) => void} props.setSelectedBrands
  */
 const ProductFilter = ({ title, items, selectedBrands, setSelectedBrands }) => {
