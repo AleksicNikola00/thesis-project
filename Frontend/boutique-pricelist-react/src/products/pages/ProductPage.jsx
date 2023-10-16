@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import ProductGrid from "../components/ProductGrid";
-import { getBrands } from "../api/products-api";
+import { getBrands, getProducts } from "../api/products-api";
 import { useSearchParams } from "react-router-dom";
 import { searchParamsMap } from "../helpers/search-params-map";
 import CircleSpinner from "../../shared/ui/components/spinners/CircleSpiner";
@@ -11,10 +11,17 @@ const ProductPage = () => {
 
   const productType = searchParams.get(searchParamsMap.productType);
   const brands = searchParams.get(searchParamsMap.brands);
+  const pageNumber = +searchParams.get(searchParamsMap.pageNumber);
 
   const { data: brandMap, isPending: isFilterPending } = useQuery({
     queryKey: ["products", productType],
     queryFn: () => getBrands(productType),
+  });
+
+  const { data: products, isPending: areProductsPending } = useQuery({
+    queryKey: ["products", productType, pageNumber],
+    //Because of user friendly interface it starts with 1, but backend expects it to start from 0
+    queryFn: () => getProducts(productType, pageNumber - 1),
   });
 
   const setSelectedBrands = (selectedBrands) => {
@@ -41,7 +48,11 @@ const ProductPage = () => {
         )}
       </aside>
       <section className="flex-1 ms-56 my-10 ">
-        <ProductGrid />
+        {areProductsPending ? (
+          <CircleSpinner />
+        ) : (
+          <ProductGrid products={products} />
+        )}
       </section>
     </div>
   );
