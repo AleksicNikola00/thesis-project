@@ -33,9 +33,9 @@ const ProductFilter = ({ title, items, selectedBrands, setSelectedBrands }) => {
   };
 
   return (
-    <div className="flex h-full  relative flex-col items-center">
+    <div className="flex h-full relative flex-col items-center">
       <span className="font-bold text-base  text-center">{title}</span>
-      <div className="w-full h-full">
+      <div className="w-full overflow-y-auto">
         <Scrollbar size="sm">
           <ul className="w-full text-sm px-6">
             {filteredItems.map(({ brand, count, selected }) => (
