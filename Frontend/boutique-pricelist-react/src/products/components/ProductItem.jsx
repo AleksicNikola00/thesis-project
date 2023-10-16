@@ -12,12 +12,11 @@ const ProductItem = ({ product }) => {
       id={product.id}
       className="product-item dark:bg-white  flex flex-col items-center rounded-lg
       border-2 border-zinc-300 shadow-lg
-      transition ease-in-out delay-150
-      hover:-translate-y-1 hover:scale-105 hover:cursor-pointer hover:font-bold"
+      hover:cursor-pointer"
     >
       <img className="rounded-t-lg" src={product.imgUrl} />
       <span className="text-sm text-center dark:text-black p-3">
-        <em>{product.brand}</em> &mdash; {product.model}
+        <span className="italic">{product.brand}</span> &mdash; {product.model}
       </span>
     </div>
   );

@@ -1,2 +1,8 @@
 .product-item {
+  transition: scale 200ms ease-in-out 50ms, font-weight 200ms ease-in-out 50ms;
+}
+
+.product-item:hover {
+  scale: 107%;
+  font-weight: bold;
 }
