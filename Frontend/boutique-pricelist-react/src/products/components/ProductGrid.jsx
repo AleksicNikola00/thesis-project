@@ -21,12 +21,12 @@ const ProductGrid = ({ products }) => {
   };
   return (
     <Scrollbar>
-      <div className="grid grid-cols-4 gap-20  py-5 px-10">
+      <div className="grid grid-cols-4 gap-20 py-5 px-10">
         {products.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))}
       </div>
-      <footer className="left-1/2  flex justify-center">
+      <footer className="left-1/2 flex justify-center">
         <PageSelector
           totalPageNum={10}
           currentPage={currentPage}

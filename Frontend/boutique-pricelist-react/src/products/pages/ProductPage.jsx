@@ -19,9 +19,9 @@ const ProductPage = () => {
   });
 
   const { data: products, isPending: areProductsPending } = useQuery({
-    queryKey: ["products", productType, pageNumber],
+    queryKey: ["products", productType, pageNumber, brands],
     //Because of user friendly interface it starts with 1, but backend expects it to start from 0
-    queryFn: () => getProducts(productType, pageNumber - 1),
+    queryFn: () => getProducts(productType, pageNumber - 1, brands),
   });
 
   const setSelectedBrands = (selectedBrands) => {

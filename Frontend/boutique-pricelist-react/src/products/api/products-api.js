@@ -32,16 +32,18 @@ export const getBrands = async (productType) => {
 
 /**
  * @param {'clothes' | 'shoes'} productType
- * * @param {number} pageNum
+ * @param {number} pageNum
+ * @param {string} brands
  * @returns {Promise<Product[]>} A promise to the BrandMap list
  */
-export const getProducts = async (productType, pageNum) => {
+export const getProducts = async (productType, pageNum, brands) => {
   const pageSize = 20;
   const response = await axios.get(`${url}`, {
     params: {
       productType,
       pageNum,
       pageSize,
+      brands,
     },
   });
   return response.data;
