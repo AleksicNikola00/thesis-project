@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import PageSelector from "../../shared/ui/components/controls/PageSelector/PageSelector";
 import { searchParamsMap } from "../helpers/search-params-map";
 import ProductItem from "./ProductItem";
+import Scrollbar from "../../shared/ui/components/wrappers/Scrollbar";
 
 /**
  *
@@ -19,7 +20,7 @@ const ProductGrid = ({ products }) => {
     });
   };
   return (
-    <div className="h-full  scrollbar  scrollbar-w-3 scrollbar-track-rounded-lg scrollbar-track-gray-500 scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900 overflow-y-auto">
+    <Scrollbar>
       <div className="grid grid-cols-4 gap-20  py-5 px-10">
         {products.map((product) => (
           <ProductItem key={product.id} product={product} />
@@ -33,7 +34,7 @@ const ProductGrid = ({ products }) => {
           selectedPageHandler={selectedPageHandler}
         />
       </footer>
-    </div>
+    </Scrollbar>
   );
 };
 

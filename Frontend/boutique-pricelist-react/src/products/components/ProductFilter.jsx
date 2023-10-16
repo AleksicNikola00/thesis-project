@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import TooltipWrapper from "../../shared/ui/components/wrappers/TooltipWrapper";
+import Scrollbar from "../../shared/ui/components/wrappers/Scrollbar";
 
 //Character that separates selected brands
 const BRANDS_SEPARATOR = ",";
@@ -32,40 +33,37 @@ const ProductFilter = ({ title, items, selectedBrands, setSelectedBrands }) => {
   };
 
   return (
-    <div className="flex h-full relative flex-col items-center">
-      <span className="font-bold text-base text-center">{title}</span>
-      <div
-        className="flex 500 w-full overflow-y-auto px-6 text-sm justify-center
-                    scrollbar  scrollbar-w-1 
-                    scrollbar-track-rounded-lg scrollbar-track-gray-500
-                    scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900"
-      >
-        <ul className="w-full">
-          {filteredItems.map(({ brand, count, selected }) => (
-            <li key={brand} className="flex mt-5 items-center gap-5">
-              <input
-                id={brand}
-                type="checkbox"
-                checked={selected}
-                onChange={onChangeHandler}
-              />
-              <span className="flex items-center gap-2">
-                {/* brandLength + countLength is total span length */}
-                {brand.length + count.toString().length < MAX_BRAND_LENGTH ? (
-                  <span>{brand}</span>
-                ) : (
-                  <TooltipWrapper
-                    label={brand}
-                    tooltip={brand}
-                    labelLimit={MAX_BRAND_LENGTH - count.toString().length}
-                    tooltipPosition="center"
-                  />
-                )}
-                ({count})
-              </span>
-            </li>
-          ))}
-        </ul>
+    <div className="flex h-full  relative flex-col items-center">
+      <span className="font-bold text-base  text-center">{title}</span>
+      <div className="w-full h-full">
+        <Scrollbar size="sm">
+          <ul className="w-full text-sm px-6">
+            {filteredItems.map(({ brand, count, selected }) => (
+              <li key={brand} className="flex mt-5 items-center gap-5">
+                <input
+                  id={brand}
+                  type="checkbox"
+                  checked={selected}
+                  onChange={onChangeHandler}
+                />
+                <span className="flex items-center gap-2">
+                  {/* brandLength + countLength is total span length */}
+                  {brand.length + count.toString().length < MAX_BRAND_LENGTH ? (
+                    <span>{brand}</span>
+                  ) : (
+                    <TooltipWrapper
+                      label={brand}
+                      tooltip={brand}
+                      labelLimit={MAX_BRAND_LENGTH - count.toString().length}
+                      tooltipPosition="center"
+                    />
+                  )}
+                  ({count})
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Scrollbar>
       </div>
     </div>
   );
