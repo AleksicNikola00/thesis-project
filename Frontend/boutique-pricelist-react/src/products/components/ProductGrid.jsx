@@ -2,6 +2,8 @@ import PageSelector from "../../shared/ui/components/controls/PageSelector/PageS
 import ProductItem from "./ProductItem";
 import Scrollbar from "../../shared/ui/components/wrappers/Scrollbar";
 
+const STARTING_PAGE = 1;
+
 /**
  *
  * @param {object} props
@@ -15,15 +17,6 @@ const ProductGrid = ({
   currentPage,
   setSelectedPage,
 }) => {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const currentPage = +searchParams.get(searchParamsMap.pageNumber);
-
-  // const selectedPageHandler = (selectedPage) => {
-  //   setSearchParams((prevState) => {
-  //     prevState.set(searchParamsMap.pageNumber, selectedPage);
-  //     return prevState;
-  //   });
-  // };
   return (
     <Scrollbar>
       <div className="grid grid-cols-4 gap-20 py-5 px-10">
@@ -31,14 +24,16 @@ const ProductGrid = ({
           <ProductItem key={product.id} product={product} />
         ))}
       </div>
-      <footer className="left-1/2 flex justify-center">
-        <PageSelector
-          totalPageNum={totalPageNum}
-          currentPage={currentPage}
-          startingPageNum={1}
-          selectedPageHandler={setSelectedPage}
-        />
-      </footer>
+      {totalPageNum > 1 && (
+        <footer className="left-1/2 flex justify-center">
+          <PageSelector
+            totalPageNum={totalPageNum}
+            currentPage={currentPage}
+            startingPageNum={STARTING_PAGE}
+            selectedPageHandler={setSelectedPage}
+          />
+        </footer>
+      )}
     </Scrollbar>
   );
 };

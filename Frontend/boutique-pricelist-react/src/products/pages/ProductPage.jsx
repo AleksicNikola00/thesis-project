@@ -33,9 +33,10 @@ const ProductPage = () => {
 
   const setSelectedBrands = (selectedBrands) => {
     setSearchParams((prevState) => {
-      selectedBrands
-        ? prevState.set(searchParamsMap.brands, selectedBrands)
-        : prevState.delete(searchParamsMap.brands);
+      if (selectedBrands) prevState.set(searchParamsMap.brands, selectedBrands);
+      else prevState.delete(searchParamsMap.brands);
+
+      prevState.set(searchParamsMap.pageNumber, 1);
       return prevState;
     });
   };
