@@ -9,7 +9,9 @@ const Scrollbar = ({ children, size }) => {
   return (
     <div
       className={clsx(
-        "h-full scrollbar scrollbar-track-rounded-lg  scrollbar-track-gray-500 scrollbar-thumb-rounded-lg scrollbar-thumb-gray-900 overflow-y-auto",
+        "h-full scrollbar scrollbar-track-rounded-lg scrollbar-thumb-rounded-lg overflow-y-auto",
+        "scrollbar-track-zinc-200 scrollbar-thumb-zinc-400",
+        "dark:scrollbar-track-gray-500  dark:scrollbar-thumb-neutral-900",
         {
           ["scrollbar-w-1"]: size === "sm",
           ["scrollbar-w-3"]: size === "md",
