@@ -8,6 +8,7 @@ import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType
 import com.ftn.thesisProject.products.persistance.repository.ProductBaseRepository;
 import com.ftn.thesisProject.products.service.ProductBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,7 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     }
 
     @Override
-    public List<ProductBase> findFiltered(ProductType type, int pageNum, int elementNum, String[] brands) {
+    public Page<ProductBase> findFiltered(ProductType type, int pageNum, int elementNum, String[] brands) {
         if(brands!=null && brands.length!= 0)
             return productBaseRepository.findAllByProductTypeAndBrandIn(type, Arrays.asList(brands),PageRequest.of(pageNum,elementNum));
         else

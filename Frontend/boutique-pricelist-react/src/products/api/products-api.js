@@ -31,10 +31,18 @@ export const getBrands = async (productType) => {
  */
 
 /**
+ * @typedef ProductPage
+ * @property {Product[]} content Slice of products for the selected page
+ * @property {boolean} last True if the page is last one
+ * @property {number} totalPages Number of total pages
+ * @property {number} totalElements  Total number of products
+ */
+
+/**
  * @param {'clothes' | 'shoes'} productType
  * @param {number} pageNum
  * @param {string} brands
- * @returns {Promise<Product[]>} A promise to the BrandMap list
+ * @returns {Promise<ProductPage>} A promise to the BrandMap list
  */
 export const getProducts = async (productType, pageNum, brands) => {
   const pageSize = 20;

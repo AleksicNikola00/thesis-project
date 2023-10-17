@@ -12,16 +12,23 @@ const ProductPage = () => {
   const productType = searchParams.get(searchParamsMap.productType);
   const brands = searchParams.get(searchParamsMap.brands);
   const pageNumber = +searchParams.get(searchParamsMap.pageNumber);
+  const currentPage = +searchParams.get(searchParamsMap.pageNumber);
 
   const { data: brandMap, isPending: isFilterPending } = useQuery({
     queryKey: ["products", productType],
     queryFn: () => getBrands(productType),
   });
 
-  const { data: products, isPending: areProductsPending } = useQuery({
+  const { data, isPending: areProductsPending } = useQuery({
     queryKey: ["products", productType, pageNumber, brands],
-    //Because of user friendly interface it starts with 1, but backend expects it to start from 0
-    queryFn: () => getProducts(productType, pageNumber - 1, brands),
+    queryFn: () =>
+      getProducts(
+        productType,
+        // Because of user friendly interface page number starts with 1, but backend expects it to start from 0
+        pageNumber - 1,
+        // Removing last comma from brands
+        brands ? brands.slice(0, -1) : ""
+      ),
   });
 
   const setSelectedBrands = (selectedBrands) => {
@@ -29,6 +36,13 @@ const ProductPage = () => {
       selectedBrands
         ? prevState.set(searchParamsMap.brands, selectedBrands)
         : prevState.delete(searchParamsMap.brands);
+      return prevState;
+    });
+  };
+
+  const setSelectedPage = (selectedPage) => {
+    setSearchParams((prevState) => {
+      prevState.set(searchParamsMap.pageNumber, selectedPage);
       return prevState;
     });
   };
@@ -51,7 +65,12 @@ const ProductPage = () => {
         {areProductsPending ? (
           <CircleSpinner />
         ) : (
-          <ProductGrid products={products} />
+          <ProductGrid
+            products={data.content}
+            totalPageNum={data.totalPages}
+            currentPage={currentPage}
+            setSelectedPage={setSelectedPage}
+          />
         )}
       </section>
     </div>

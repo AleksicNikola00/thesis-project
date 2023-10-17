@@ -2,17 +2,22 @@ package com.ftn.thesisProject.products.api.v1;
 
 import com.ftn.thesisProject.products.api.dto.ProductBaseDTO;
 import com.ftn.thesisProject.products.api.dto.ProductDetailsDTO;
+import com.ftn.thesisProject.products.api.dto.ProductPageDTO;
 import com.ftn.thesisProject.products.api.mapper.ProductDetailsMapper;
 import com.ftn.thesisProject.products.api.mapper.ProductMapper;
+import com.ftn.thesisProject.products.api.mapper.ProductPageMapper;
 import com.ftn.thesisProject.products.exceptions.custom.InvalidProductTypeException;
 import com.ftn.thesisProject.products.persistance.model.BrandMap;
+import com.ftn.thesisProject.products.persistance.model.ProductBase;
 import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 import com.ftn.thesisProject.products.service.ProductBaseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RequestMapping("/products")
@@ -24,7 +29,7 @@ public class ProductController {
     private final ProductBaseService productBaseService;
 
     @GetMapping()
-    public ResponseEntity<List<ProductBaseDTO>> getProductsPageable(
+    public ResponseEntity<ProductPageDTO> getProductsPageable(
             @RequestParam int pageNum,
             @RequestParam int pageSize,
             @RequestParam String productType,
@@ -32,8 +37,7 @@ public class ProductController {
     ) {
         var type = getProductType(productType);
         var products = productBaseService.findFiltered(type,pageNum,pageSize, brands);
-
-        var retProducts = ProductMapper.INSTANCE.toProductBaseDTOs(products);
+        var retProducts = ProductPageMapper.INSTANCE.toProductPageDTO(products);
         return ResponseEntity.ok(retProducts);
     }
 

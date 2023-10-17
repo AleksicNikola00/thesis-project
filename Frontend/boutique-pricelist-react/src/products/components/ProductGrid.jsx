@@ -1,24 +1,29 @@
-import { useSearchParams } from "react-router-dom";
 import PageSelector from "../../shared/ui/components/controls/PageSelector/PageSelector";
-import { searchParamsMap } from "../helpers/search-params-map";
 import ProductItem from "./ProductItem";
 import Scrollbar from "../../shared/ui/components/wrappers/Scrollbar";
 
 /**
  *
  * @param {object} props
- * @param {}
+ * @param {totalPageNum} props.totalPageNum Number of pages in the grid
+ * @param {currentPage} props.currentPage Currently selected page
+ * @param {(selectedPage: number) => void} props.setSelectedPage
  */
-const ProductGrid = ({ products }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = +searchParams.get(searchParamsMap.pageNumber);
+const ProductGrid = ({
+  products,
+  totalPageNum,
+  currentPage,
+  setSelectedPage,
+}) => {
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const currentPage = +searchParams.get(searchParamsMap.pageNumber);
 
-  const selectedPageHandler = (selectedPage) => {
-    setSearchParams((prevState) => {
-      prevState.set(searchParamsMap.pageNumber, selectedPage);
-      return prevState;
-    });
-  };
+  // const selectedPageHandler = (selectedPage) => {
+  //   setSearchParams((prevState) => {
+  //     prevState.set(searchParamsMap.pageNumber, selectedPage);
+  //     return prevState;
+  //   });
+  // };
   return (
     <Scrollbar>
       <div className="grid grid-cols-4 gap-20 py-5 px-10">
@@ -28,10 +33,10 @@ const ProductGrid = ({ products }) => {
       </div>
       <footer className="left-1/2 flex justify-center">
         <PageSelector
-          totalPageNum={10}
+          totalPageNum={totalPageNum}
           currentPage={currentPage}
           startingPageNum={1}
-          selectedPageHandler={selectedPageHandler}
+          selectedPageHandler={setSelectedPage}
         />
       </footer>
     </Scrollbar>
