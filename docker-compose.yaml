@@ -34,7 +34,6 @@ services:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       PRODUCT_APP_PORT: ${PRODUCT_APP_PORT}
-      PAGINATION_SIZE: ${PAGINATION_SIZE}
     ports:
       - ${PRODUCT_APP_PORT}:${PRODUCT_APP_PORT}
     depends_on:

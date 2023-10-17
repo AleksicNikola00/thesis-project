@@ -6,7 +6,6 @@ import com.ftn.thesisProject.products.api.mapper.ProductDetailsMapper;
 import com.ftn.thesisProject.products.api.mapper.ProductMapper;
 import com.ftn.thesisProject.products.exceptions.custom.InvalidProductTypeException;
 import com.ftn.thesisProject.products.persistance.model.BrandMap;
-import com.ftn.thesisProject.products.persistance.model.ProductBase;
 import com.ftn.thesisProject.products.persistance.model.enumerations.ProductType;
 import com.ftn.thesisProject.products.service.ProductBaseService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/products")
