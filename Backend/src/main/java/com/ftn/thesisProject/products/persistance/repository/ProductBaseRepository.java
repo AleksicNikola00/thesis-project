@@ -18,6 +18,6 @@ public interface ProductBaseRepository extends JpaRepository<ProductBase, Long> 
     Page<ProductBase> findAllByProductType(ProductType productType, Pageable pageable);
     Page<ProductBase> findAllByProductTypeAndBrandIn(ProductType productType, List<String> brands, Pageable pageable);
     @Query("select p from ProductBase p where lower(concat(p.brand,' ',p.model)) like lower(concat('%',?1,'%'))")
-    List<ProductBase> searchByCriteria(String criteria, Pageable pageable);
+    Page<ProductBase> searchByCriteria(String criteria, Pageable pageable);
     Long countByProductType(ProductType productType);
 }

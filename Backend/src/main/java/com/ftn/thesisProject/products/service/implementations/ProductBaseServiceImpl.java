@@ -62,7 +62,7 @@ public class ProductBaseServiceImpl implements ProductBaseService {
     }
 
     @Override
-    public List<ProductBase> search(String criteria,int pageNum,int elementNum) {
+    public Page<ProductBase> search(String criteria,int pageNum,int elementNum) {
         return productBaseRepository.searchByCriteria(criteria,PageRequest.of(pageNum,elementNum));
     }
 

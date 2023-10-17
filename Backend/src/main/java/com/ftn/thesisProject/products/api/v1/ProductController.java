@@ -49,10 +49,10 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ProductBaseDTO>> search(@RequestParam int pageNum,@RequestParam int pageSize ,@RequestParam String criteria){
+    public ResponseEntity<ProductPageDTO> search(@RequestParam int pageNum,@RequestParam int pageSize ,@RequestParam String criteria){
         var products = productBaseService.search(criteria,pageNum, pageSize);
-        var retProducts = ProductMapper.INSTANCE.toProductBaseDTOs(products);
-        return new ResponseEntity<>(retProducts, HttpStatus.OK);
+        var retProducts = ProductPageMapper.INSTANCE.toProductPageDTO(products);
+        return ResponseEntity.ok(retProducts);
     }
 
 
