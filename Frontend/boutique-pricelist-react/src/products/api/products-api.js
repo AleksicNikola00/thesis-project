@@ -46,7 +46,7 @@ export const getBrands = async (productType) => {
  */
 export const getProducts = async (productType, pageNum, brands) => {
   const pageSize = 20;
-  const response = await axios.get(`${url}`, {
+  const response = await axios.get(url, {
     params: {
       productType,
       pageNum,
@@ -54,5 +54,24 @@ export const getProducts = async (productType, pageNum, brands) => {
       brands,
     },
   });
+  return response.data;
+};
+
+/**
+ * @param {'clothes' | 'shoes'} productType
+ * @param {number} pageNum Page number used for pagination
+ * @param {string} criteria Search criteria
+ * @param {number} [pageSize=5] Element per page, default value is 5
+ * @returns {Promise<ProductPage>} A promise to the BrandMap list
+ */
+export const searchProducts = async (pageNum, criteria, pageSize = 5) => {
+  const response = await axios.get(`${url}/search`, {
+    params: {
+      pageNum,
+      pageSize,
+      criteria,
+    },
+  });
+
   return response.data;
 };

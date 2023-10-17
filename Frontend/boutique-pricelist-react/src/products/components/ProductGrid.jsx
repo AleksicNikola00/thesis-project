@@ -20,7 +20,7 @@ const ProductGrid = ({
 }) => {
   const scrollRef = useRef();
 
-  const selectedPageHandler = async (selectedPage) => {
+  const selectedPageHandler = (selectedPage) => {
     scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
     setSelectedPage(selectedPage);
   };

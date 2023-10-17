@@ -1,10 +1,10 @@
 import CheckroomIcon from "@mui/icons-material/Checkroom";
+import { useNavigate } from "react-router-dom";
+
 import NavbarItem from "./NavbarItem";
 import OppositeVariantButton from "../components/controls/OppositeVariantButton";
-
-import SearchBar from "../components/inputs/SearchBar";
 import useButtonVariant from "./useButtonVariant";
-import { useNavigate } from "react-router-dom";
+import ProductSearch from "../../../products/components/ProductSearch";
 
 const Navbar = () => {
   const { lightModeVariant, darkModeVariant, initialVariant } =
@@ -31,7 +31,7 @@ const Navbar = () => {
         </NavbarItem>
 
         <div className="flex justify-content gap-5  items-center">
-          <SearchBar />
+          <ProductSearch />
           <NavbarItem id="display-mode" tooltip="Change mode">
             <OppositeVariantButton
               firstVariant={lightModeVariant}
