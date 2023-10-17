@@ -1,6 +1,7 @@
 import PageSelector from "../../shared/ui/components/controls/PageSelector/PageSelector";
 import ProductItem from "./ProductItem";
 import Scrollbar from "../../shared/ui/components/wrappers/Scrollbar";
+import { useRef } from "react";
 
 const STARTING_PAGE = 1;
 
@@ -17,8 +18,15 @@ const ProductGrid = ({
   currentPage,
   setSelectedPage,
 }) => {
+  const scrollRef = useRef();
+
+  const selectedPageHandler = async (selectedPage) => {
+    scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    setSelectedPage(selectedPage);
+  };
+
   return (
-    <Scrollbar>
+    <Scrollbar ref={scrollRef}>
       <div className="grid grid-cols-4 gap-20 py-5 px-10">
         {products.map((product) => (
           <ProductItem key={product.id} product={product} />
@@ -30,7 +38,7 @@ const ProductGrid = ({
             totalPageNum={totalPageNum}
             currentPage={currentPage}
             startingPageNum={STARTING_PAGE}
-            selectedPageHandler={setSelectedPage}
+            selectedPageHandler={selectedPageHandler}
           />
         </footer>
       )}

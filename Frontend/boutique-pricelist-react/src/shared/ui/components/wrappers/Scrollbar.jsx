@@ -1,13 +1,16 @@
 import clsx from "clsx";
+import { forwardRef } from "react";
 
 /**
  * @param {object} props
+ * @param {RefType} ref
  * @param {React.ReactNode} props.children Children jsx element wrapped with scrollbar
  * @param {'sm' | 'md' | 'lg'} [props.size='md'] Size of the scrollbar
  */
-const Scrollbar = ({ children, size }) => {
+const Scrollbar = forwardRef(function scrollbarArea({ children, size }, ref) {
   return (
     <div
+      ref={ref}
       className={clsx(
         "h-full scrollbar scrollbar-track-rounded-lg scrollbar-thumb-rounded-lg overflow-y-auto",
         "scrollbar-track-zinc-200 scrollbar-thumb-zinc-400",
@@ -22,6 +25,6 @@ const Scrollbar = ({ children, size }) => {
       {children}
     </div>
   );
-};
+});
 
 export default Scrollbar;

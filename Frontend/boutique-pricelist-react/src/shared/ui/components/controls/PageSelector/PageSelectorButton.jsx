@@ -14,9 +14,12 @@ const PageSelectorButton = ({ selected, pageNum, setSelectedPage }) => {
   return (
     <button
       onClick={onClickHandler}
-      className={clsx("hover:bg-zinc-300 dark:hover:bg-black px-2 rounded-lg", {
-        ["dark:bg-black bg-zinc-300"]: selected,
-      })}
+      className={clsx(
+        "hover:bg-zinc-300 relative flex justify-center dark:hover:bg-black px-2 rounded-lg",
+        {
+          ["dark:bg-black bg-zinc-300 border-2 border-white"]: selected,
+        }
+      )}
     >
       {pageNum}
     </button>
